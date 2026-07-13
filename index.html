@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orange Invent House Ltd. - System Design Canvas</title>
     <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/tailwind.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -307,13 +308,17 @@
                         <i class="fa-solid fa-chart-line text-orange-primary"></i>
                         <span>Live Document View</span>
                     </span>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="downloadAsMarkdownFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-3 py-1.5 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition">
-                            <i class="fa-solid fa-download"></i>
+                    <div class="flex items-center space-x-1.5">
+                        <button onclick="downloadAsMarkdownFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-2.5 py-1.5 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition" title="Download Markdown (.md)">
+                            <i class="fa-solid fa-file-code"></i>
                             <span>Download MD</span>
                         </button>
-                        <button onclick="triggerPrintMode()" class="text-xs bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-semibold flex items-center space-x-1.5 shadow-sm transition">
-                            <i class="fa-solid fa-print"></i>
+                        <button onclick="downloadAsDocFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-2.5 py-1.5 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition" title="Download Word Document (.doc)">
+                            <i class="fa-solid fa-file-word text-blue-600"></i>
+                            <span>Download DOC</span>
+                        </button>
+                        <button onclick="triggerPrintMode()" class="text-xs bg-orange-primary hover:bg-orange-dark text-white px-2.5 py-1.5 rounded font-semibold flex items-center space-x-1.5 shadow-sm transition" title="Print/Export to PDF">
+                            <i class="fa-solid fa-file-pdf"></i>
                             <span>Print PDF</span>
                         </button>
                     </div>
@@ -623,6 +628,162 @@ Describe deployment profiles, continuous monitoring clusters, pipeline automatio
                 document.body.removeChild(link);
             }
             showToast(`Downloaded: ${fileName}`);
+        }
+
+        // Download structured HTML wrapped with Word formatting metadata (.doc extension is highly compatible for Word/GDocs)
+        function downloadAsDocFile() {
+            const previewHtml = document.getElementById('markdown-preview').innerHTML;
+            const projectName = document.getElementById('var-project-name').value;
+            const clientName = document.getElementById('var-client-name').value;
+            const docId = document.getElementById('var-revision').value;
+            const docStatus = document.getElementById('var-doc-status').value;
+
+            // Strict XML/HTML template mimicking corporate layout for Word document generation
+            const convertedHtml = `
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+                  xmlns:w='urn:schemas-microsoft-com:office:word' 
+                  xmlns='http://www.w3.org/TR/REC-html40'>
+            <head>
+                <meta charset="utf-8">
+                <title>${projectName} - System Design Document</title>
+                <style>
+                    @page {
+                        size: A4;
+                        margin: 1.0in;
+                    }
+                    body { 
+                        font-family: 'Arial', 'Helvetica', sans-serif; 
+                        line-height: 1.6; 
+                        color: #212121; 
+                    }
+                    /* Corporate header block optimized for Word */
+                    .doc-header {
+                        border-bottom: 4px solid #E65100;
+                        padding-bottom: 12px;
+                        margin-bottom: 30px;
+                    }
+                    .doc-header h4 {
+                        color: #E65100;
+                        font-size: 16pt;
+                        margin: 0 0 5px 0;
+                        text-transform: uppercase;
+                    }
+                    .doc-header p {
+                        font-size: 9.5pt;
+                        color: #555555;
+                        margin: 0;
+                        font-family: Courier, monospace;
+                    }
+                    /* Headers styled dynamically matching Orange brand */
+                    h1 { 
+                        color: #E65100; 
+                        font-size: 20pt; 
+                        border-bottom: 2px solid #E65100; 
+                        padding-bottom: 6px; 
+                        margin-top: 24px;
+                        margin-bottom: 12px;
+                    }
+                    h2 { 
+                        color: #212121; 
+                        font-size: 15pt; 
+                        border-left: 4px solid #FF9800; 
+                        padding-left: 8px; 
+                        margin-top: 18px;
+                        margin-bottom: 10px;
+                    }
+                    h3 { 
+                        color: #D84315; 
+                        font-size: 12pt; 
+                        margin-top: 14px;
+                        margin-bottom: 8px;
+                    }
+                    p, li { 
+                        font-size: 10.5pt; 
+                        margin-bottom: 10px; 
+                        line-height: 1.5;
+                    }
+                    ul, ol {
+                        margin-left: 20px;
+                        margin-bottom: 12px;
+                    }
+                    code { 
+                        background-color: #FFF8E1; 
+                        color: #D84315; 
+                        font-family: 'Courier New', monospace; 
+                        padding: 2px 4px; 
+                        font-size: 9.5pt;
+                    }
+                    pre { 
+                        background-color: #212121; 
+                        color: #FAFAFA; 
+                        padding: 12px; 
+                        border-left: 4px solid #E65100; 
+                        font-family: 'Courier New', monospace; 
+                        font-size: 9.5pt;
+                        margin-bottom: 12px;
+                        white-space: pre-wrap;
+                    }
+                    table { 
+                        border-collapse: collapse; 
+                        width: 100%; 
+                        margin-top: 12px;
+                        margin-bottom: 20px; 
+                    }
+                    th { 
+                        background-color: #E65100; 
+                        color: #ffffff; 
+                        padding: 8px; 
+                        border: 1px solid #FFB300; 
+                        font-weight: bold; 
+                        font-size: 10pt;
+                        text-align: left;
+                    }
+                    td { 
+                        padding: 8px; 
+                        border: 1px solid #E0E0E0; 
+                        font-size: 10pt;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #FFF8E1;
+                    }
+                    blockquote { 
+                        border-left: 4px solid #E65100; 
+                        background-color: #FFF8E1; 
+                        padding: 10px 15px; 
+                        margin: 0 0 12px 0; 
+                        font-style: italic; 
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="doc-header">
+                    <h4>ORANGE INVENT HOUSE LTD.</h4>
+                    <p>SOLUTIONS ARCHITECTURE DIVISION • LAGOS, NIGERIA</p>
+                    <p>PROJECT: ${projectName}</p>
+                    <p>CLIENT: ${clientName}</p>
+                    <p>DOCUMENT ID: ${docId} | STATUS: ${docStatus}</p>
+                </div>
+                ${previewHtml}
+            </body>
+            </html>`;
+
+            // Setup download package payload
+            const blob = new Blob(['\ufeff' + convertedHtml], {
+                type: 'application/msword'
+            });
+            const fileName = `${docId.toLowerCase().replace(/[^a-z0-9]/g, '_')}_design.doc`;
+            
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, fileName);
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            showToast(`Downloaded Word Document: ${fileName}`);
         }
 
         // Custom Print utility to optimize UI view layouts dynamically before invoking browser native print engines
