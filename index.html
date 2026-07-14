@@ -189,21 +189,14 @@
         <aside class="no-print w-72 bg-white border-r border-neutral-border flex flex-col justify-between hidden lg:flex">
             <div class="p-5 space-y-6 overflow-y-auto flex-1">
                 <div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Target Blueprints</h3>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Active Blueprints</h3>
                     <div class="space-y-2">
-                        <button onclick="loadFormTemplate('feva')" class="w-full text-left px-4 py-3 rounded-lg border border-orange-primary bg-orange-light text-orange-primary font-semibold flex items-center justify-between transition hover:bg-orange-100 shadow-sm" id="btn-tmpl-feva">
-                            <span class="flex items-center space-x-3">
-                                <i class="fa-solid fa-mobile-screen"></i>
-                                <span>FEVA Design</span>
-                            </span>
-                            <span class="text-[9px] bg-orange-primary text-white font-mono px-1.5 py-0.5 rounded">Active</span>
-                        </button>
-                        <button onclick="loadFormTemplate('blank')" class="w-full text-left px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold flex items-center justify-between transition hover:border-orange-amber hover:bg-neutral-light" id="btn-tmpl-blank">
+                        <button onclick="loadFormTemplate('blank')" class="w-full text-left px-4 py-3 rounded-lg border border-orange-primary bg-orange-light text-orange-primary font-semibold flex items-center justify-between transition hover:bg-orange-100 shadow-sm" id="btn-tmpl-blank">
                             <span class="flex items-center space-x-3">
                                 <i class="fa-solid fa-file-signature"></i>
                                 <span>Empty Profile</span>
                             </span>
-                            <span class="text-[9px] bg-gray-200 text-gray-600 font-mono px-1.5 py-0.5 rounded">NEW</span>
+                            <span class="text-[9px] bg-orange-primary text-white font-mono px-1.5 py-0.5 rounded">Active</span>
                         </button>
                     </div>
                 </div>
@@ -212,7 +205,7 @@
                     <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Build Pipeline</h3>
                     <div class="bg-gray-50 border rounded-lg p-3 text-[11px] space-y-2 font-mono text-gray-600">
                         <div class="flex items-center justify-between">
-                            <span>Markdown Compiler:</span>
+                            <span>Dynamic Compiler:</span>
                             <span class="text-orange-primary font-bold">READY</span>
                         </div>
                         <div class="flex items-center justify-between">
@@ -282,9 +275,9 @@
                             <div>
                                 <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Document Status</label>
                                 <select id="inp-status" onchange="compileDynamicDoc()" class="w-full text-xs p-2.5 rounded border border-gray-300 bg-gray-50 hover:bg-white focus:outline-none focus:border-orange-primary transition">
-                                    <option value="APPROVED">APPROVED</option>
                                     <option value="DRAFT">DRAFT</option>
                                     <option value="UNDER REVIEW">UNDER REVIEW</option>
+                                    <option value="APPROVED">APPROVED</option>
                                 </select>
                             </div>
                         </div>
@@ -440,29 +433,6 @@
     <!-- PREDEFINED SCHEMATICS FOR ACCORDIONS -->
     <script>
         const templates = {
-            feva: {
-                projectName: "FIELD ENUMERATION AND VERIFICATION APPLICATION (FEVA)",
-                clientName: "INSPIRED GLOBAL SYSTEMS LTD (IGSL)",
-                revision: "OIH-IGSL-FEVA-V1.0",
-                status: "APPROVED",
-                execOverview: "The Field Enumeration and Verification Application (FEVA) is an enterprise-grade, offline-first mobile and cloud ecosystem designed for high-throughput field data capture, geographical boundary mapping (GIS), biometric verification, and administrative audit workflows.\n\nDue to volatile infrastructure conditions in target deployment areas, the platform employs a strict offline-first local state machine on mobile clients, executing bi-directional cryptographic synchronization once network connectivity (3G/4G/GPRS) is restored.",
-                screens: [
-                    { path: "/auth/login", description: "Provisioning Dashboard: Primary gateway verifying credentials offline via SQLCipher derivation parameters.", flow: "Enumerator types identifier and dynamic passcode to derive AES local database key sets." },
-                    { path: "/dashboard", description: "Enumerator Core Hub: Displays local status indicators (e.g. Sync-state counters, GPS accuracy warnings, storage constraints).", flow: "Detects signal -> Triggers background sync thread task metrics." },
-                    { path: "/capture/demographics", description: "Demographic Wizard: Dynamic form input fields ensuring compliance and high-throughput collection speed.", flow: "Next button click -> Writes clean state models down directly into Local SQLite caches." },
-                    { path: "/capture/geospatial", description: "GIS Boundary Overlay: Interactive OpenStreetMap engine capturing polygon vertex points.", flow: "Floating boundary click -> Capture hardware coordinates and evaluate accuracy boundaries." }
-                ],
-                apis: [
-                    { method: "POST", path: "/api/v1/enumeration/sync", trigger: "User clicks \"Force Sync Now\" or scheduler detects active signal stream", json: "{\n  \"batch_id\": \"f81d4fae-7dec-11d0-a765-00a0c91e6bf6\",\n  \"data_records\": [\n    {\n      \"local_id\": \"a4d95c10-092f-41be-8dbb-5eb2ca447b92\",\n      \"first_name\": \"Ibrahim\",\n      \"last_name\": \"Musa\",\n      \"gps\": {\n        \"latitude\": 6.6018,\n        \"longitude\": 3.3515,\n        \"accuracy\": 1.25\n      }\n    }\n  ]\n}" },
-                    { method: "POST", path: "/api/v1/spatial/within-boundary", trigger: "Automatic boundary verification step inside the GIS mapping panel", json: "{\n  \"within_target_bounds\": true,\n  \"assigned_zone_id\": \"ZONE-LAGOS-MAIN\",\n  \"distance_to_boundary_meters\": 0.0\n}" }
-                ],
-                databases: [
-                    { tableName: "entity_geospatial_data", sql: "-- Spatial Database Schema Configuration\nCREATE TABLE entity_geospatial_data (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    entity_id UUID REFERENCES enumerated_entities(id) ON DELETE CASCADE,\n    gps_accuracy NUMERIC(5,2) NOT NULL,          \n    coordinates GEOMETRY(Point, 4326) NOT NULL,   -- WGS84 Standard Coordinates\n    boundary_polygon GEOMETRY(Polygon, 4326),     -- Plot Boundary Mapping Spatial Footprint\n    altitude NUMERIC(6,2),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE INDEX idx_geospatial_coordinates ON entity_geospatial_data USING GIST (coordinates);" }
-                ],
-                secMobile: "Client SQLCipher full disk encryption via dynamic PBKDF2 hash key sets.",
-                secTransit: "Custom HTTPS transport client configurations enforcing certificate pinning.",
-                secStorage: "AWS S3 server-side block-level envelope encryption rules."
-            },
             blank: {
                 projectName: "ENTERPRISE CORE ENGINE PROJECT",
                 clientName: "INTERNAL SYSTEMS LABS INC",
@@ -512,21 +482,9 @@
             state.apis = JSON.parse(JSON.stringify(data.apis));
             state.databases = JSON.parse(JSON.stringify(data.databases));
 
-            // Sync structural buttons
-            const btnFeva = document.getElementById('btn-tmpl-feva');
-            const btnBlank = document.getElementById('btn-tmpl-blank');
-
-            if (type === 'feva') {
-                btnFeva.className = "w-full text-left px-4 py-3 rounded-lg border border-orange-primary bg-orange-light text-orange-primary font-semibold flex items-center justify-between transition hover:bg-orange-100 shadow-sm";
-                btnBlank.className = "w-full text-left px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold flex items-center justify-between transition hover:border-orange-amber hover:bg-neutral-light";
-            } else {
-                btnBlank.className = "w-full text-left px-4 py-3 rounded-lg border border-orange-primary bg-orange-light text-orange-primary font-semibold flex items-center justify-between transition hover:bg-orange-100 shadow-sm";
-                btnFeva.className = "w-full text-left px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 font-semibold flex items-center justify-between transition hover:border-orange-amber hover:bg-neutral-light";
-            }
-
             renderAllDynamicSubsections();
             compileDynamicDoc();
-            showToast("Structured Template Loaded");
+            showToast("Empty Baseline Template Loaded");
         }
 
         function renderScreens() {
@@ -759,7 +717,7 @@ ${db.sql || '-- No SQL script defined'}
 **PREPARED BY:** SOLUTIONS ARCHITECTURE DIVISION, ORANGE INVENT HOUSE LTD.
 **PREPARED FOR:** ${client}
 **DOCUMENT ID:** ${rev}
-**DATE:** MAY 24, 2026
+**DATE:** JULY 14, 2026
 **STATUS:** ${status}
 
 ---
@@ -900,7 +858,7 @@ ${apisMd}
         }
 
         window.onload = function() {
-            loadFormTemplate('feva');
+            loadFormTemplate('blank');
             updateNodeTime();
             setInterval(updateNodeTime, 10000);
         }
