@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orange Invent House Ltd. - System Design Document Builder</title>
+    <title>Orange Invent House Ltd. - System Design Canvas</title>
     <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/tailwind.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Marked.js for Markdown Parsing -->
+    <!-- Marked.js for Live Markdown Parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
@@ -18,7 +19,7 @@
             background-color: #FAFAFA;
             color: #212121;
         }
-        /* Custom scrollbar styling for enterprise quality */
+        /* Custom scrollbar styling for high-end enterprise experience */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -33,13 +34,13 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #BF360C;
         }
-        /* Print formatting optimized for PDF generation */
+        /* Native Print PDF Optimizations */
         @media print {
             .no-print { display: none !important; }
             .print-full { width: 100% !important; max-width: 100% !important; height: auto !important; overflow: visible !important; }
             body { background: white; color: black; }
         }
-        /* Markdown rendering overrides */
+        /* Markdown Preview Panel Typography Styles */
         .markdown-body h1 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -129,24 +130,25 @@
         }
     </style>
     <script>
+        // Custom Tailwind theme integration matching Orange Invent House Design System
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         orange: {
                             primary: '#E65100', // Deep Orange
-                            amber: '#FF9800',   // Orange Accent Amber
-                            light: '#FFF8E1',   // Warm White
-                            dark: '#BF360C'     // Rich Rust Red
+                            amber: '#FF9800',   // Amber Highlight
+                            light: '#FFF8E1',   // Warm Tone White
+                            dark: '#BF360C'     // Dark Terracotta Accent
                         },
                         neutral: {
-                            dark: '#212121',    // Jet Black Typography
-                            light: '#FAFAFA',   // Ice Grey Viewport
+                            dark: '#212121',    // Charcoal Typography Base
+                            light: '#FAFAFA',   // Premium Soft Gray Page Canvas
                             border: '#E0E0E0'
                         },
                         semantic: {
-                            success: '#2E7D32', // Emerald
-                            danger: '#C62828'   // Crimson
+                            success: '#2E7D32', // Safe Emerald
+                            danger: '#C62828'   // Attention Red
                         }
                     }
                 }
@@ -154,26 +156,28 @@
         }
     </script>
 </head>
-<body class="flex flex-col h-screen overflow-hidden bg-neutral-light">
+<body class="flex flex-col h-screen overflow-hidden">
 
-    <!-- TOP HEADER BAR -->
-    <header class="no-print bg-neutral-dark text-white border-b-4 border-orange-primary px-6 py-4 flex flex-wrap items-center justify-between shadow-md">
+    <!-- CORPORATE HEADER STRIP -->
+    <header class="no-print bg-neutral-dark text-white border-b-4 border-orange-primary px-6 py-4 flex flex-wrap items-center justify-between shadow-md z-10">
         <div class="flex items-center space-x-4">
+            <!-- Orange Logo Mark (Geometric representation of OIH) -->
             <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-orange-amber to-orange-primary flex items-center justify-center font-extrabold text-xl text-white shadow-inner transform rotate-3">
                 O
             </div>
             <div>
                 <h1 class="text-lg font-extrabold tracking-wide uppercase flex items-center">
-                    Orange Invent House <span class="text-orange-amber ml-2 text-xs font-semibold px-2 py-0.5 bg-orange-primary bg-opacity-20 rounded border border-orange-primary">Design Builder</span>
+                    Orange Invent House <span class="text-orange-amber ml-2 text-xs font-semibold px-2 py-0.5 bg-orange-primary bg-opacity-20 rounded border border-orange-primary">Design Canvas</span>
                 </h1>
-                <p class="text-[10px] text-gray-400 font-mono tracking-widest uppercase">Solutions Architecture Division • Lagos, Nigeria</p>
+                <p class="text-[10px] text-gray-400 font-mono tracking-widest uppercase font-semibold">Solutions Architecture Division • Lagos, Nigeria</p>
             </div>
         </div>
 
+        <!-- System Sync Stamp -->
         <div class="flex items-center space-x-6 text-xs font-mono mt-2 sm:mt-0">
             <div class="hidden md:flex items-center space-x-2 text-gray-300">
                 <i class="fa-solid fa-location-dot text-orange-amber"></i>
-                <span>6.5244° N, 3.3792° E</span>
+                <span>Lagos Node: 6.5244° N, 3.3792° E</span>
             </div>
             <div class="flex items-center space-x-2 bg-black bg-opacity-40 px-3 py-1.5 rounded-md border border-gray-800">
                 <span class="h-2 w-2 rounded-full bg-semantic-success animate-pulse"></span>
@@ -182,329 +186,422 @@
         </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
+    <!-- CORE WORKSPACE FRAME -->
     <main class="flex-1 flex overflow-hidden">
         
-        <!-- SIDEBAR (Quick Controls & Template Swapper) -->
-        <aside class="no-print w-72 bg-white border-r border-neutral-border flex flex-col justify-between hidden lg:flex">
-            <div class="p-5 space-y-6 overflow-y-auto flex-1">
-                <div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Active Blueprints</h3>
-                    <div class="space-y-2">
-                        <button onclick="loadFormTemplate('blank')" class="w-full text-left px-4 py-3 rounded-lg border border-orange-primary bg-orange-light text-orange-primary font-semibold flex items-center justify-between transition hover:bg-orange-100 shadow-sm" id="btn-tmpl-blank">
-                            <span class="flex items-center space-x-3">
-                                <i class="fa-solid fa-file-signature"></i>
-                                <span>Empty Profile</span>
-                            </span>
-                            <span class="text-[9px] bg-orange-primary text-white font-mono px-1.5 py-0.5 rounded">Active</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Build Pipeline</h3>
-                    <div class="bg-gray-50 border rounded-lg p-3 text-[11px] space-y-2 font-mono text-gray-600">
-                        <div class="flex items-center justify-between">
-                            <span>Dynamic Compiler:</span>
-                            <span class="text-orange-primary font-bold">READY</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span>Word Export Engine:</span>
-                            <span class="text-blue-600 font-bold">ONLINE</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span>PDF Stylesheet:</span>
-                            <span class="text-semantic-success font-bold">ACTIVE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-t pt-4">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Architect Rules</h3>
-                    <ul class="text-[11px] text-gray-600 space-y-1 list-disc pl-4">
-                        <li>Avoid empty endpoint descriptions</li>
-                        <li>Maintain standard coordinate parameters</li>
-                        <li>Format database schemas explicitly</li>
-                    </ul>
-                </div>
+        <!-- LEFT: CUSTOM COMPONENT BUILDER DASHBOARD (NO-PRINT) -->
+        <aside class="no-print w-1/2 bg-white border-r border-neutral-border flex flex-col h-full overflow-hidden">
+            
+            <!-- Controls Head/Reset Options -->
+            <div class="bg-gray-50 border-b border-neutral-border px-6 py-3.5 flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center space-x-2">
+                    <i class="fa-solid fa-sliders text-orange-primary"></i>
+                    <span>Architectural Component Modules</span>
+                </span>
+                <button onclick="resetToEmptyProfile()" class="text-xs text-semantic-danger hover:text-white bg-white hover:bg-semantic-danger border border-red-200 px-3 py-1.5 rounded font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Reset Canvas (Empty Blueprint)</span>
+                </button>
             </div>
 
-            <div class="p-5 border-t border-neutral-border bg-orange-light bg-opacity-50">
-                <div class="flex items-center justify-between text-[11px] text-orange-dark font-mono">
-                    <span>Lagos HQ Node</span>
-                    <span class="px-2 py-0.5 bg-orange-amber bg-opacity-20 rounded font-bold border border-orange-amber text-[10px]">VERIFIED</span>
-                </div>
+            <!-- Scrollable Input Form Modules -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-8">
+                
+                <!-- MODULE 1: GLOBAL METADATA -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-circle-info text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Document Controls & Metadata</h2>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Project Name</label>
+                            <input type="text" id="inp-project-name" onkeyup="updateState('projectName', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="Enter system title...">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Prepared For (Client)</label>
+                            <input type="text" id="inp-client-name" onkeyup="updateState('clientName', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="Client Node name...">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Document Revision ID</label>
+                            <input type="text" id="inp-revision" onkeyup="updateState('revision', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="OIH-PRD-001">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Document Status</label>
+                            <select id="inp-status" onchange="updateState('status', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 bg-white focus:outline-none focus:border-orange-primary">
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="DRAFT">DRAFT</option>
+                                <option value="UNDER REVIEW">UNDER REVIEW</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MODULE 2: SYSTEM OVERVIEW -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-paragraph text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Executive Summary</h2>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">High-Level Problem & Solution statement</label>
+                        <textarea id="inp-exec-overview" onkeyup="updateState('execOverview', this.value)" rows="4" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="Provide background on the ecosystem under design..."></textarea>
+                    </div>
+                </section>
+
+                <!-- MODULE 3: FRONTEND USER INTERFACES (DYNAMIC SCALING SENSORS) -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-laptop-code text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Frontend Interactive Views</h2>
+                        </span>
+                        <button onclick="addScreen()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add New Screen View</span>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-gray-500 italic mt-1">
+                        *Note: Creating or modifying a screen auto-generates corresponding endpoints and databases.
+                    </p>
+
+                    <div id="screens-dynamic-list" class="space-y-4">
+                        <!-- Screens list container injected here dynamically -->
+                    </div>
+                </section>
+
+                <!-- MODULE 4: SYSTEM APIS & EVENTS HANDSHAKES -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-network-wired text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">System APIs & Event Streams</h2>
+                        </span>
+                        <button onclick="addAPI()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add New API Endpoint</span>
+                        </button>
+                    </div>
+
+                    <div id="apis-dynamic-list" class="space-y-4">
+                        <!-- APIs list container injected here dynamically -->
+                    </div>
+                </section>
+
+                <!-- MODULE 5: RELATIONAL DATA MODELS & TABLES -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-database text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Database Entities & Schemas</h2>
+                        </span>
+                        <button onclick="addDatabase()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1 shadow-sm">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add New DB Table Schema</span>
+                        </button>
+                    </div>
+
+                    <div id="databases-dynamic-list" class="space-y-4">
+                        <!-- Databases list container injected here dynamically -->
+                    </div>
+                </section>
+
+                <!-- MODULE 6: NON-FUNCTIONAL TECHNICAL SECURITY STRATEGY -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-shield-halved text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Non-Functional Security Target Thresholds</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">On-Device Local Data Security Strategy</label>
+                            <textarea id="inp-sec-mobile" onkeyup="updateState('secMobile', this.value)" rows="2" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="Target strategies for caching/offline storage..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">In-Transit Secure Networking Rules</label>
+                            <textarea id="inp-sec-transit" onkeyup="updateState('secTransit', this.value)" rows="2" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="Target strategies for mobile-to-cloud handshakes..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Cloud Object & Asset Security Protection</label>
+                            <textarea id="inp-sec-storage" onkeyup="updateState('secStorage', this.value)" rows="2" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="Target strategies for S3, media and metadata buckets..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </aside>
 
-        <!-- SPLIT VIEWPORT: FORM PANEL & LIVE VIEW -->
-        <section class="flex-1 flex flex-col md:flex-row print-full overflow-hidden">
+        <!-- RIGHT: LIVE SDD COMPILATION PREVIEW (PRINT COMPATIBLE) -->
+        <section class="flex-1 flex flex-col h-full bg-white relative print-full overflow-hidden">
             
-            <!-- LEFT PANEL: CUSTOM FORM BUILDER -->
-            <div class="no-print w-full md:w-1/2 flex flex-col border-r border-neutral-border h-full bg-white overflow-hidden">
-                <div class="bg-gray-100 px-5 py-3 border-b border-neutral-border flex items-center justify-between shrink-0">
-                    <span class="text-xs font-extrabold text-gray-700 uppercase tracking-widest flex items-center space-x-2">
-                        <i class="fa-solid fa-square-poll-horizontal text-orange-primary"></i>
-                        <span>System Metadata & Form Fields</span>
-                    </span>
-                    <span class="text-[10px] text-gray-500 font-mono">Inputs auto-save & compile</span>
-                </div>
-
-                <!-- SCROLLABLE FORM SEGMENT -->
-                <div class="flex-1 overflow-y-auto p-6 space-y-8" id="form-container">
-                    
-                    <!-- Form Part 1: Metadata -->
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-orange-primary pl-3">
-                            <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">1. Core Metadata Headers</h2>
-                            <p class="text-xs text-gray-500">Standard document metadata stamped on physical and digital exports.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Project Name</label>
-                                <input type="text" id="inp-project-name" oninput="compileDynamicDoc()" class="w-full text-xs p-2.5 rounded border border-gray-300 focus:outline-none focus:border-orange-primary bg-gray-50 hover:bg-white transition">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Prepared For</label>
-                                <input type="text" id="inp-client-name" oninput="compileDynamicDoc()" class="w-full text-xs p-2.5 rounded border border-gray-300 focus:outline-none focus:border-orange-primary bg-gray-50 hover:bg-white transition">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Document Revision ID</label>
-                                <input type="text" id="inp-revision" oninput="compileDynamicDoc()" class="w-full text-xs p-2.5 rounded border border-gray-300 focus:outline-none focus:border-orange-primary bg-gray-50 hover:bg-white transition">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Document Status</label>
-                                <select id="inp-status" onchange="compileDynamicDoc()" class="w-full text-xs p-2.5 rounded border border-gray-300 bg-gray-50 hover:bg-white focus:outline-none focus:border-orange-primary transition">
-                                    <option value="DRAFT">DRAFT</option>
-                                    <option value="UNDER REVIEW">UNDER REVIEW</option>
-                                    <option value="APPROVED">APPROVED</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Form Part 2: Executive Overview -->
-                    <div class="space-y-4 border-t pt-6">
-                        <div class="border-l-4 border-orange-primary pl-3">
-                            <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">2. Executive Summary</h2>
-                            <p class="text-xs text-gray-500">Provide system topology details and deployment context parameters.</p>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-600 tracking-wider mb-1">Executive Summary Text</label>
-                            <textarea id="inp-exec-overview" oninput="compileDynamicDoc()" rows="4" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary bg-gray-50 hover:bg-white transition font-sans leading-relaxed"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Form Part 3: Frontend Screens (Dynamic) -->
-                    <div class="space-y-4 border-t pt-6">
-                        <div class="border-l-4 border-orange-primary pl-3 flex items-center justify-between">
-                            <div>
-                                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">3. Frontend Views & UI Flow</h2>
-                                <p class="text-xs text-gray-500">Add dynamic application interfaces, screen paths, and client operations.</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-orange-light bg-opacity-60 border border-orange-primary border-opacity-30 p-3 rounded-lg flex items-start space-x-3 text-xs text-orange-dark">
-                            <i class="fa-solid fa-wand-magic-sparkles mt-0.5 text-orange-primary"></i>
-                            <p><strong>Automation Activated:</strong> Adding a screen here automatically provisions a synchronized backend endpoint schema and SQL table database loop. Modifying route paths auto-refactors database schemas live.</p>
-                        </div>
-
-                        <!-- Dynamic Screen Target List -->
-                        <div id="screens-dynamic-list" class="space-y-4">
-                            <!-- Injected by JavaScript -->
-                        </div>
-
-                        <button onclick="addScreen()" class="mt-2 w-full border-2 border-dashed border-orange-amber hover:border-orange-primary text-orange-primary hover:text-orange-dark text-xs py-3.5 rounded-lg font-bold flex items-center justify-center space-x-2 bg-orange-light bg-opacity-30 hover:bg-opacity-50 transition">
-                            <i class="fa-solid fa-circle-plus"></i>
-                            <span>Add New Interactive View / Screen</span>
-                        </button>
-                    </div>
-
-                    <!-- Form Part 4: APIs (Dynamic) -->
-                    <div class="space-y-4 border-t pt-6">
-                        <div class="border-l-4 border-orange-primary pl-3">
-                            <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">4. System APIs & Events</h2>
-                            <p class="text-xs text-gray-500">Document essential endpoints triggered directly by user interfaces.</p>
-                        </div>
-
-                        <!-- Dynamic API Target List -->
-                        <div id="apis-dynamic-list" class="space-y-4">
-                            <!-- Injected by JavaScript -->
-                        </div>
-
-                        <button onclick="addAPI()" class="mt-2 w-full border-2 border-dashed border-orange-amber hover:border-orange-primary text-orange-primary hover:text-orange-dark text-xs py-3.5 rounded-lg font-bold flex items-center justify-center space-x-2 bg-orange-light bg-opacity-30 hover:bg-opacity-50 transition">
-                            <i class="fa-solid fa-circle-plus"></i>
-                            <span>Add New Endpoint / API Event</span>
-                        </button>
-                    </div>
-
-                    <!-- Form Part 5: Relational & Spatial Database Schemas (Dynamic) -->
-                    <div class="space-y-4 border-t pt-6">
-                        <div class="border-l-4 border-orange-primary pl-3">
-                            <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">5. Database Schema & SQL Scripts</h2>
-                            <p class="text-xs text-gray-500">Map structural attributes, schema diagrams, and indexing properties.</p>
-                        </div>
-
-                        <!-- Dynamic Database Target List -->
-                        <div id="db-dynamic-list" class="space-y-4">
-                            <!-- Injected by JavaScript -->
-                        </div>
-
-                        <button onclick="addDatabaseTable()" class="mt-2 w-full border-2 border-dashed border-orange-amber hover:border-orange-primary text-orange-primary hover:text-orange-dark text-xs py-3.5 rounded-lg font-bold flex items-center justify-center space-x-2 bg-orange-light bg-opacity-30 hover:bg-opacity-50 transition">
-                            <i class="fa-solid fa-circle-plus"></i>
-                            <span>Add New SQL Schema Table / Entity</span>
-                        </button>
-                    </div>
-
-                    <!-- Form Part 6: Non-Functional Security Provisions -->
-                    <div class="space-y-4 border-t pt-6">
-                        <div class="border-l-4 border-orange-primary pl-3">
-                            <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wide">6. Security & Compliance Matrix</h2>
-                            <p class="text-xs text-gray-500">State target compliance guidelines across multiple logical tiers.</p>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center bg-gray-50 p-3 rounded border">
-                                <span class="text-xs font-bold text-orange-primary uppercase font-mono">Mobile Database Security</span>
-                                <input type="text" id="inp-sec-mobile" oninput="compileDynamicDoc()" class="w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary">
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center bg-gray-50 p-3 rounded border">
-                                <span class="text-xs font-bold text-orange-primary uppercase font-mono">In-Transit Security</span>
-                                <input type="text" id="inp-sec-transit" oninput="compileDynamicDoc()" class="w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary">
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center bg-gray-50 p-3 rounded border">
-                                <span class="text-xs font-bold text-orange-primary uppercase font-mono">Storage Security</span>
-                                <input type="text" id="inp-sec-storage" oninput="compileDynamicDoc()" class="w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary">
-                            </div>
-                        </div>
-                    </div>
-
+            <!-- Preview Action Toolbar (No Print) -->
+            <div class="no-print bg-gray-50 px-6 py-3 border-b border-neutral-border flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center space-x-2">
+                    <i class="fa-solid fa-laptop-code text-orange-primary"></i>
+                    <span>Live Architecture Document Preview</span>
+                </span>
+                <div class="flex items-center space-x-2">
+                    <button onclick="downloadAsDocFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-3 py-1.5 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-file-word text-blue-600"></i>
+                        <span>Download DOC</span>
+                    </button>
+                    <button onclick="triggerPrintMode()" class="text-xs bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold flex items-center space-x-1.5 shadow-sm transition">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Print PDF</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- RIGHT PANEL: COMPRESSED LIVE VIEWPORT -->
-            <div class="w-full md:w-1/2 flex flex-col h-full bg-white relative print-full">
+            <!-- Scrollable Page Canvas -->
+            <div class="flex-1 overflow-y-auto p-8 md:p-12 print-full" id="print-canvas">
                 
-                <!-- Output Controls Header -->
-                <div class="no-print bg-gray-100 px-4 py-2 border-b border-neutral-border flex items-center justify-between shrink-0">
-                    <span class="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center space-x-2">
-                        <i class="fa-solid fa-chart-line text-orange-primary"></i>
-                        <span>Live compiled view</span>
-                    </span>
-                    <div class="flex items-center space-x-1.5">
-                        <button onclick="downloadAsDocFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-3 py-2 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition" title="Download Word Document (.doc)">
-                            <i class="fa-solid fa-file-word text-blue-600"></i>
-                            <span>Download DOC</span>
-                        </button>
-                        <button onclick="triggerPrintMode()" class="text-xs bg-orange-primary hover:bg-orange-dark text-white px-3 py-2 rounded font-semibold flex items-center space-x-1.5 shadow-sm transition" title="Print/Export to PDF">
-                            <i class="fa-solid fa-file-pdf"></i>
-                            <span>Print PDF</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- PREVIEW CONTAINER CANVAS -->
-                <div class="flex-1 overflow-y-auto p-8 print-full bg-white" id="print-canvas">
-                    
-                    <!-- Word and PDF Print specific layout wrapper -->
-                    <div class="hidden print:flex flex-col border-b-4 border-orange-primary pb-4 mb-6">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h1 class="text-xl font-bold uppercase text-orange-primary">ORANGE INVENT HOUSE LTD.</h1>
-                                <p class="text-xs font-mono text-gray-600">Solutions Architecture Division • Lagos, Nigeria</p>
-                            </div>
-                            <div class="text-right text-[10px] font-mono text-gray-500">
-                                <p>DOC ID: <span id="print-rev-code">-</span></p>
-                                <p>STATUS: <span id="print-doc-status">-</span></p>
-                            </div>
+                <!-- Print Letterhead Header Banner -->
+                <div class="hidden print:flex flex-col border-b-4 border-orange-primary pb-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-xl font-bold uppercase text-orange-primary">ORANGE INVENT HOUSE LTD.</h1>
+                            <p class="text-xs font-mono text-gray-600">Solutions Architecture Division • Lagos, Nigeria</p>
+                        </div>
+                        <div class="text-right text-[10px] font-mono text-gray-500">
+                            <p>DOC ID: <span id="print-rev-code">OIH-SDD-EMPTY-V1.0</span></p>
+                            <p>STATUS: <span id="print-doc-status">DRAFT</span></p>
                         </div>
                     </div>
-
-                    <!-- Inner parsed target -->
-                    <div id="markdown-preview" class="markdown-body"></div>
                 </div>
 
+                <!-- Live Document Target -->
+                <div id="markdown-preview" class="markdown-body"></div>
             </div>
 
         </section>
 
     </main>
 
-    <!-- NOTIFICATION POPUP -->
+    <!-- NOTIFICATION SYSTEM -->
     <div id="toast-notif" class="no-print fixed bottom-6 right-6 bg-neutral-dark text-white text-xs px-5 py-3.5 rounded-lg shadow-2xl border-l-4 border-orange-primary transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50">
         <i class="fa-solid fa-circle-check text-orange-amber"></i>
-        <span id="toast-message">Record Synced Successfully.</span>
+        <span id="toast-message">Workspace reset successful.</span>
     </div>
 
-    <!-- PREDEFINED SCHEMATICS FOR ACCORDIONS -->
+    <!-- CORE LOGIC & STATE HANDLING -->
     <script>
-        const templates = {
-            blank: {
-                projectName: "ENTERPRISE CORE ENGINE PROJECT",
-                clientName: "INTERNAL SYSTEMS LABS INC",
-                revision: "OIH-CORE-SDD-V1.0",
-                status: "DRAFT",
-                execOverview: "Define the high level objectives, context, core operational metrics and business expectations of your system design below.",
-                screens: [
-                    { id: "scr_init", path: "/home", description: "Corporate homepage displaying aggregate indicators", flow: "Initial dashboard loader fetches context markers." }
-                ],
-                apis: [
-                    { id: "api_init", screenId: "scr_init", method: "POST", path: "/api/v1/home/sync", trigger: "User triggers sync on home view", json: "{\n  \"device_token\": \"TOKEN-993-41A\"\n}", dirty: false }
-                ],
-                databases: [
-                    { id: "db_init", screenId: "scr_init", tableName: "tbl_home", sql: "CREATE TABLE tbl_home (\n    id SERIAL PRIMARY KEY,\n    email VARCHAR(255) UNIQUE NOT NULL\n);", dirty: false }
-                ],
-                secMobile: "Local application sandboxing.",
-                secTransit: "TLS 1.2 minimum payload structures.",
-                secStorage: "Encrypted DB drives."
-            }
-        };
-    </script>
-
-    <!-- CORE INTERACTIVE ENGINE -->
-    <script>
+        // Stateful empty profile initialization for Orange Invent House
         let state = {
+            projectName: "NEW CORE ARCHITECTURE SOLUTION",
+            clientName: "ORANGE INVENT HOUSE",
+            revision: "OIH-SDD-NEW-V1.0",
+            status: "DRAFT",
+            execOverview: "The core platform leverages a multi-client architecture designed to support distributed workflows with unified storage layers...",
+            secMobile: "Local database tables are encrypted via full AES-256 standards with derived keys.",
+            secTransit: "TLS 1.3 encryption with strict TLS cipher constraints and client certificate pinning.",
+            secStorage: "Data blocks stored in standard cloud containers with strict IAM configurations and expiring signed URLs.",
             screens: [],
             apis: [],
             databases: []
         };
 
-        // Load dynamic properties from specified templates
-        function loadFormTemplate(type) {
-            const data = templates[type];
-
-            // Core non-array headers
-            document.getElementById('inp-project-name').value = data.projectName;
-            document.getElementById('inp-client-name').value = data.clientName;
-            document.getElementById('inp-revision').value = data.revision;
-            document.getElementById('inp-status').value = data.status;
-            document.getElementById('inp-exec-overview').value = data.execOverview;
-            document.getElementById('inp-sec-mobile').value = data.secMobile;
-            document.getElementById('inp-sec-transit').value = data.secTransit;
-            document.getElementById('inp-sec-storage').value = data.secStorage;
-
-            // Deep copy of structural arrays
-            state.screens = JSON.parse(JSON.stringify(data.screens));
-            state.apis = JSON.parse(JSON.stringify(data.apis));
-            state.databases = JSON.parse(JSON.stringify(data.databases));
-
-            renderAllDynamicSubsections();
+        // UI Reset Option to return to clean Baseline Draft state
+        function resetToEmptyProfile() {
+            state = {
+                projectName: "EMPTY BLUEPRINT PROFILE",
+                clientName: "INTERNAL SYSTEMS",
+                revision: "OIH-SDD-EMPTY-V1.0",
+                status: "DRAFT",
+                execOverview: "",
+                secMobile: "",
+                secTransit: "",
+                secStorage: "",
+                screens: [],
+                apis: [],
+                databases: []
+            };
+            syncFormWithState();
             compileDynamicDoc();
-            showToast("Empty Baseline Template Loaded");
+            showToast("Workspace reset back to empty profile baseline");
         }
 
-        // Render dynamic screen form inputs directly
+        // Setup forms UI structures
+        function syncFormWithState() {
+            document.getElementById('inp-project-name').value = state.projectName;
+            document.getElementById('inp-client-name').value = state.clientName;
+            document.getElementById('inp-revision').value = state.revision;
+            document.getElementById('inp-status').value = state.status;
+            document.getElementById('inp-exec-overview').value = state.execOverview;
+            document.getElementById('inp-sec-mobile').value = state.secMobile;
+            document.getElementById('inp-sec-transit').value = state.secTransit;
+            document.getElementById('inp-sec-storage').value = state.secStorage;
+
+            renderScreens();
+            renderAPIs();
+            renderDatabases();
+        }
+
+        // Live input key listeners (Doesn't cause rendering re-draw, preventing focus failures)
+        function updateState(key, value) {
+            state[key] = value;
+            compileDynamicDoc();
+        }
+
+        // UNIQUE ID CREATOR (Guarantees robust reference linking)
+        function makeShortId() {
+            return Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+
+        // ==========================================
+        // DYNAMIC SCREEN BUILDER & AUTOMATED LOOPS
+        // ==========================================
+        function addScreen() {
+            const sid = "SCR_" + makeShortId();
+            const routePath = "/auth/login";
+            
+            const newScreen = {
+                id: sid,
+                client: "MOBILE", // MOBILE, WEB, or ADMIN
+                path: routePath,
+                flow: "User clicks login button -> starts verification",
+                description: "Standard entry layout handling security and local sessions"
+            };
+
+            // Automated generation loops! No orphaning.
+            const apiId = "API_" + makeShortId();
+            const linkedApi = {
+                id: apiId,
+                screenId: sid,
+                method: "POST",
+                path: "/api/v1/mobile" + routePath,
+                trigger: "User interacts with screen path: " + routePath + " (MOBILE)",
+                json: '{\n  "username": "admin",\n  "passcode": "******"\n}',
+                isDirtyPath: false,
+                isDirtyTrigger: false
+            };
+
+            const dbId = "DB_" + makeShortId();
+            const cleanPath = routePath.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const tableName = "tbl_mobile" + cleanPath;
+            const linkedDb = {
+                id: dbId,
+                screenId: sid,
+                tableName: tableName,
+                sql: `CREATE TABLE ${tableName} (\n    id SERIAL PRIMARY KEY,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);`,
+                isDirtyName: false,
+                isDirtySql: false
+            };
+
+            state.screens.push(newScreen);
+            state.apis.push(linkedApi);
+            state.databases.push(linkedDb);
+
+            renderScreens();
+            renderAPIs();
+            renderDatabases();
+            compileDynamicDoc();
+            showToast(`Added Screen ${sid} and linked downstream structures`);
+        }
+
+        function removeScreen(index) {
+            const sid = state.screens[index].id;
+            state.screens.splice(index, 1);
+
+            // Orphan protection purge loops
+            state.apis = state.apis.filter(api => api.screenId !== sid);
+            state.databases = state.databases.filter(db => db.screenId !== sid);
+
+            renderScreens();
+            renderAPIs();
+            renderDatabases();
+            compileDynamicDoc();
+            showToast("Purged Screen and associated dependencies");
+        }
+
+        function updateScreen(index, field, value) {
+            const screen = state.screens[index];
+            screen[field] = value;
+
+            // Automation syncing triggers
+            if (field === 'path' || field === 'client') {
+                const sid = screen.id;
+                const routePath = screen.path;
+                const clientType = screen.client;
+                const routePrefix = clientType.toLowerCase();
+
+                // Sync API properties dynamically unless dirty
+                state.apis.forEach((api, aIdx) => {
+                    if (api.screenId === sid) {
+                        if (!api.isDirtyPath) {
+                            api.path = `/api/v1/${routePrefix}${routePath}`;
+                            // Direct DOM injection to avoid complete redraw and preserve typing focus
+                            const pathEl = document.getElementById(`api-path-${api.id}`);
+                            if (pathEl) pathEl.value = api.path;
+                        }
+                        if (!api.isDirtyTrigger) {
+                            api.trigger = `User interacts with screen path: ${routePath} (${clientType})`;
+                            const trigEl = document.getElementById(`api-trig-${api.id}`);
+                            if (trigEl) trigEl.value = api.trigger;
+                        }
+                    }
+                });
+
+                // Sync Database properties dynamically unless dirty
+                state.databases.forEach((db, dbIdx) => {
+                    if (db.screenId === sid) {
+                        const cleanPath = routePath.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                        const oldTableName = db.tableName;
+                        const newTableName = `tbl_${routePrefix}${cleanPath}`;
+
+                        if (!db.isDirtyName) {
+                            db.tableName = newTableName;
+                            const nameEl = document.getElementById(`db-name-${db.id}`);
+                            if (nameEl) nameEl.value = db.tableName;
+                        }
+
+                        if (!db.isDirtySql) {
+                            const escapedOldName = oldTableName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                            const regexMatch = new RegExp(escapedOldName, 'g');
+                            db.sql = db.sql.replace(regexMatch, newTableName);
+                            const sqlEl = document.getElementById(`db-sql-${db.id}`);
+                            if (sqlEl) sqlEl.value = db.sql;
+                        }
+                    }
+                });
+            }
+
+            compileDynamicDoc();
+        }
+
+        // Dynamic screen form inputs support the tech-agnostic strategy
         function renderScreens() {
             const container = document.getElementById('screens-dynamic-list');
             container.innerHTML = '';
 
             state.screens.forEach((screen, index) => {
                 const screenDiv = document.createElement('div');
-                screenDiv.className = "screen-item bg-gray-50 p-4 rounded-lg border space-y-3 relative border-l-4 border-orange-primary";
+                
+                // Color codes based on target platform
+                let borderCol = "border-teal-500";
+                let bgCol = "bg-teal-50 bg-opacity-20";
+                if (screen.client === 'WEB') {
+                    borderCol = "border-orange-amber";
+                    bgCol = "bg-orange-light bg-opacity-20";
+                } else if (screen.client === 'ADMIN') {
+                    borderCol = "border-slate-700";
+                    bgCol = "bg-slate-50";
+                }
+
+                screenDiv.className = `screen-item p-4 rounded-lg border space-y-3 relative border-l-4 ${borderCol} ${bgCol}`;
                 screenDiv.innerHTML = `
                     <button onclick="removeScreen(${index})" class="absolute top-2.5 right-2.5 text-gray-400 hover:text-semantic-danger transition" title="Delete Screen (Will automatically clean linked APIs/DB Tables)">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">Client Strategy Target</label>
+                            <select class="w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-bold" onchange="updateScreen(${index}, 'client', this.value); renderScreens();">
+                                <option value="MOBILE" ${screen.client === 'MOBILE' ? 'selected' : ''}>Mobile App</option>
+                                <option value="WEB" ${screen.client === 'WEB' ? 'selected' : ''}>Public Web</option>
+                                <option value="ADMIN" ${screen.client === 'ADMIN' ? 'selected' : ''}>Admin</option>
+                            </select>
+                        </div>
                         <div>
                             <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">Route Path / Navigation Key</label>
                             <input type="text" value="${screen.path}" placeholder="/auth/login" class="screen-path w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-mono" oninput="updateScreen(${index}, 'path', this.value)">
@@ -520,259 +617,163 @@
                     </div>
                     <div class="text-[9px] font-mono text-orange-dark bg-orange-light bg-opacity-40 p-2 rounded flex items-center justify-between">
                         <span>Associated UID: <strong>${screen.id}</strong></span>
-                        <span class="flex items-center space-x-1"><i class="fa-solid fa-link animate-pulse"></i> <span>Automated Pipeline Hook Active</span></span>
+                        <span class="flex items-center space-x-1"><i class="fa-solid fa-link animate-pulse"></i> <span>Platform Hook Synchronized</span></span>
                     </div>
                 `;
                 container.appendChild(screenDiv);
             });
         }
 
-        // Smart Screen Add-Hook triggers API and Database generations instantly
-        function addScreen() {
-            const screenId = "scr_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
-            const defaultPath = "/new-screen-" + state.screens.length;
-            const cleanPathName = defaultPath.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
-            const generatedTableName = "tbl_" + (cleanPathName || "records");
 
-            // Add Screen Node
-            state.screens.push({
-                id: screenId,
-                path: defaultPath,
-                description: "Describe the interactive behaviors of this user layout.",
-                flow: "Describe sequence flow triggered on this screen layout."
-            });
-
-            // Auto-Spawn linked API
-            state.apis.push({
-                id: "api_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
-                screenId: screenId,
-                method: "POST",
-                path: "/api/v1" + defaultPath + "/sync",
-                trigger: "User executes main CTA transaction on " + defaultPath,
-                json: "{\n  \"status\": \"pending_handshake\",\n  \"payload\": {}\n}",
-                dirty: false
-            });
-
-            // Auto-Spawn linked DB SQL query
-            state.databases.push({
-                id: "db_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
-                screenId: screenId,
-                tableName: generatedTableName,
-                sql: `CREATE TABLE ${generatedTableName} (\n    id SERIAL PRIMARY KEY,\n    linked_uuid VARCHAR(100) NOT NULL,\n    captured_payload JSONB,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);`,
-                dirty: false
-            });
-
-            renderAllDynamicSubsections();
-            compileDynamicDoc();
-            showToast("Screen added! Backend APIs and Database entities auto-provisioned.");
-        }
-
-        // Deleting Screen wipes linked components cleanly preventing orphaned items
-        function removeScreen(index) {
-            const targetScreen = state.screens[index];
-            const screenId = targetScreen.id;
-
-            // Purge screen itself
-            state.screens.splice(index, 1);
-
-            // Clean associated API and DB profiles
-            state.apis = state.apis.filter(api => api.screenId !== screenId);
-            state.databases = state.databases.filter(db => db.screenId !== screenId);
-
-            renderAllDynamicSubsections();
-            compileDynamicDoc();
-            showToast("Screen deleted! Connected backend APIs and DB configurations purged.");
-        }
-
-        // Focus-safe direct property modification updates
-        function updateScreen(idx, field, val) {
-            const screen = state.screens[idx];
-            const screenId = screen.id;
-            const oldPath = screen.path;
-            
-            screen[field] = val;
-
-            // Core path binding updates
-            if (field === 'path') {
-                const cleanPathName = val.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
-                const generatedTableName = "tbl_" + (cleanPathName || "records");
-
-                // Check and rewrite associated API
-                const linkedApi = state.apis.find(api => api.screenId === screenId);
-                if (linkedApi && !linkedApi.dirty) {
-                    linkedApi.path = "/api/v1" + val + "/sync";
-                    linkedApi.trigger = "User executes main CTA transaction on " + val;
-                    renderAPIs(); // Refresh fields representation
-                }
-
-                // Check and rewrite associated DB Table properties
-                const linkedDb = state.databases.find(db => db.screenId === screenId);
-                if (linkedDb && !linkedDb.dirty) {
-                    const oldTableName = linkedDb.tableName;
-                    linkedDb.tableName = generatedTableName;
-
-                    // Regex replace old table name inside default script
-                    if (linkedDb.sql.includes(oldTableName)) {
-                        linkedDb.sql = linkedDb.sql.replace(new RegExp(oldTableName, 'g'), generatedTableName);
-                    }
-                    renderDatabaseTables(); // Refresh fields representation
-                }
-            }
-
-            compileDynamicDoc();
-        }
-
-        // Render API list forms
-        function renderAPIs() {
-            const container = document.getElementById('apis-dynamic-list');
-            container.innerHTML = '';
-
-            state.apis.forEach((api, index) => {
-                const apiDiv = document.createElement('div');
-                apiDiv.className = "api-item bg-gray-50 p-4 rounded-lg border space-y-3 relative " + (api.screenId ? "border-l-4 border-orange-amber" : "border-l-4 border-gray-400");
-                apiDiv.innerHTML = `
-                    <button onclick="removeAPI(${index})" class="absolute top-2.5 right-2.5 text-gray-400 hover:text-semantic-danger transition" title="Delete Endpoint">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">Method</label>
-                            <select class="api-method w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-bold text-orange-primary" onchange="updateAPI(${index}, 'method', this.value)">
-                                <option value="POST" ${api.method === 'POST' ? 'selected' : ''}>POST</option>
-                                <option value="GET" ${api.method === 'GET' ? 'selected' : ''}>GET</option>
-                                <option value="PUT" ${api.method === 'PUT' ? 'selected' : ''}>PUT</option>
-                                <option value="DELETE" ${api.method === 'DELETE' ? 'selected' : ''}>DELETE</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">Path Location Route</label>
-                            <input type="text" value="${api.path}" placeholder="/api/v1/auth" class="api-path w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-mono" oninput="updateAPI(${index}, 'path', this.value)">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">UI Trigger Sequence Action</label>
-                        <input type="text" value="${api.trigger}" placeholder="User triggers sync or automated scheduler runs" class="api-trigger w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary" oninput="updateAPI(${index}, 'trigger', this.value)">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">API Document JSON Structure Schema</label>
-                        <textarea class="api-json w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-mono" rows="3" placeholder="{\n  &quot;status&quot;: &quot;example&quot;\n}" oninput="updateAPI(${index}, 'json', this.value)">${api.json}</textarea>
-                    </div>
-                    <div class="text-[9px] font-mono flex items-center justify-between text-gray-500">
-                        <span>Tracking Code: <strong>${api.id}</strong></span>
-                        ${api.screenId ? `
-                            <span class="text-orange-amber font-semibold"><i class="fa-solid fa-link"></i> Synchronized to Screen Flow: ${getLinkedScreenPath(api.screenId)}</span>
-                        ` : `
-                            <span class="text-gray-400"><i class="fa-solid fa-unlink"></i> Independent Custom Endpoint</span>
-                        `}
-                    </div>
-                `;
-                container.appendChild(apiDiv);
-            });
-        }
-
-        // Manual API addition helper
+        // ==========================================
+        // SYSTEM API ENGINE BUILDER & MANUAL OVERRIDES
+        // ==========================================
         function addAPI() {
+            const apiId = "API_" + makeShortId();
             state.apis.push({
-                id: "api_custom_" + Date.now(),
-                screenId: null,
-                method: "POST",
-                path: "/api/v1/custom-route",
-                trigger: "User action trigger statement",
-                json: "{\n  \"custom\": true\n}",
-                dirty: true
+                id: apiId,
+                screenId: null, // Manually declared, not bound to UI
+                method: "GET",
+                path: "/api/v1/custom-endpoint",
+                trigger: "Manually registered administrative action event",
+                json: '{\n  "payload": "custom"\n}',
+                isDirtyPath: true, // Custom elements default as dirty to avoid tracking
+                isDirtyTrigger: true
             });
             renderAPIs();
             compileDynamicDoc();
-            showToast("Custom backend endpoint added");
+            showToast("Added custom, decoupled endpoint");
         }
 
         function removeAPI(index) {
             state.apis.splice(index, 1);
             renderAPIs();
             compileDynamicDoc();
-            showToast("Endpoint deleted");
+            showToast("Removed API endpoint entry");
         }
 
-        function updateAPI(idx, field, val) {
-            state.apis[idx][field] = val;
-            // Mark dirty when edited manually to prevent screen updates rewriting it
-            state.apis[idx].dirty = true;
+        function updateAPI(index, field, value) {
+            const api = state.apis[index];
+            api[field] = value;
+            
+            // Set dirty overrides
+            if (field === 'path') api.isDirtyPath = true;
+            if (field === 'trigger') api.isDirtyTrigger = true;
+
             compileDynamicDoc();
         }
 
-        // Render Database Table lists
-        function renderDatabaseTables() {
-            const container = document.getElementById('db-dynamic-list');
+        function renderAPIs() {
+            const container = document.getElementById('apis-dynamic-list');
+            container.innerHTML = '';
+
+            state.apis.forEach((api, index) => {
+                const apiDiv = document.createElement('div');
+                apiDiv.className = "api-item p-4 rounded-lg border border-gray-200 bg-white space-y-3 relative shadow-inner";
+                apiDiv.innerHTML = `
+                    <button onclick="removeAPI(${index})" class="absolute top-2.5 right-2.5 text-gray-400 hover:text-semantic-danger transition" title="Delete API Endpoint">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">Method Action</label>
+                            <select class="w-full text-xs p-2 rounded border bg-gray-50 focus:outline-none focus:border-orange-primary font-bold" onchange="updateAPI(${index}, 'method', this.value)">
+                                <option value="GET" ${api.method === 'GET' ? 'selected' : ''}>GET</option>
+                                <option value="POST" ${api.method === 'POST' ? 'selected' : ''}>POST</option>
+                                <option value="PUT" ${api.method === 'PUT' ? 'selected' : ''}>PUT</option>
+                                <option value="DELETE" ${api.method === 'DELETE' ? 'selected' : ''}>DELETE</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">Target Endpoint Location</label>
+                            <input type="text" id="api-path-${api.id}" value="${api.path}" placeholder="/api/v1/auth/login" class="w-full text-xs p-2 rounded border bg-gray-50 focus:outline-none focus:border-orange-primary font-mono" oninput="updateAPI(${index}, 'path', this.value)">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">Trigger Execution Event Scenario</label>
+                        <input type="text" id="api-trig-${api.id}" value="${api.trigger}" placeholder="User signs in and fetches credentials profile details" class="w-full text-xs p-2 rounded border bg-gray-50 focus:outline-none focus:border-orange-primary" oninput="updateAPI(${index}, 'trigger', this.value)">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">Target JSON Payload / Standard Body Model</label>
+                        <textarea class="w-full text-xs p-2.5 rounded border bg-neutral-dark text-white focus:outline-none font-mono" rows="3" placeholder="{}" oninput="updateAPI(${index}, 'json', this.value)">${api.json}</textarea>
+                    </div>
+                    <div class="text-[9px] font-mono text-gray-500 flex items-center justify-between">
+                        <span>Linked Screen ID: <strong>${api.screenId || 'MANUAL / INDEPENDENT'}</strong></span>
+                        ${api.screenId ? '<span class="text-semantic-success flex items-center space-x-1"><i class="fa-solid fa-lock"></i> <span>Wired</span></span>' : '<span class="text-gray-400">Decoupled Route</span>'}
+                    </div>
+                `;
+                container.appendChild(apiDiv);
+            });
+        }
+
+
+        // ==========================================
+        // DATABASE SCHEMA MANAGER & TABLE BUILDER
+        // ==========================================
+        function addDatabase() {
+            const dbId = "DB_" + makeShortId();
+            state.databases.push({
+                id: dbId,
+                screenId: null, // Manually declared, not bound to UI
+                tableName: "tbl_custom_store",
+                sql: `CREATE TABLE tbl_custom_store (\n    id SERIAL PRIMARY KEY,\n    meta_payload JSONB\n);`,
+                isDirtyName: true,
+                isDirtySql: true
+            });
+            renderDatabases();
+            compileDynamicDoc();
+            showToast("Added custom database table component");
+        }
+
+        function removeDatabase(index) {
+            state.databases.splice(index, 1);
+            renderDatabases();
+            compileDynamicDoc();
+            showToast("Removed database schema entry");
+        }
+
+        function updateDatabase(index, field, value) {
+            const db = state.databases[index];
+            db[field] = value;
+
+            if (field === 'tableName') db.isDirtyName = true;
+            if (field === 'sql') db.isDirtySql = true;
+
+            compileDynamicDoc();
+        }
+
+        function renderDatabases() {
+            const container = document.getElementById('databases-dynamic-list');
             container.innerHTML = '';
 
             state.databases.forEach((db, index) => {
                 const dbDiv = document.createElement('div');
-                dbDiv.className = "db-item bg-gray-50 p-4 rounded-lg border space-y-3 relative " + (db.screenId ? "border-l-4 border-orange-amber" : "border-l-4 border-gray-400");
+                dbDiv.className = "db-item p-4 rounded-lg border border-gray-200 bg-white space-y-3 relative shadow-inner";
                 dbDiv.innerHTML = `
-                    <button onclick="removeDatabaseTable(${index})" class="absolute top-2.5 right-2.5 text-gray-400 hover:text-semantic-danger transition" title="Delete Table">
+                    <button onclick="removeDatabase(${index})" class="absolute top-2.5 right-2.5 text-gray-400 hover:text-semantic-danger transition" title="Delete DB Table">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                     <div>
-                        <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">Table / Entity Name Identifier</label>
-                        <input type="text" value="${db.tableName}" placeholder="users_or_transactions" class="db-name w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-mono font-bold" oninput="updateDatabaseTable(${index}, 'tableName', this.value)">
+                        <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">Entity / Database Table Name</label>
+                        <input type="text" id="db-name-${db.id}" value="${db.tableName}" placeholder="tbl_user_profiles" class="w-full text-xs p-2 rounded border bg-gray-50 focus:outline-none focus:border-orange-primary font-mono" oninput="updateDatabase(${index}, 'tableName', this.value)">
                     </div>
                     <div>
-                        <label class="block text-[9px] font-bold uppercase text-gray-600 mb-1">SQL Definition Query Script</label>
-                        <textarea class="db-sql w-full text-xs p-2 rounded border bg-white focus:outline-none focus:border-orange-primary font-mono" rows="4" placeholder="CREATE TABLE ... " oninput="updateDatabaseTable(${index}, 'sql', this.value)">${db.sql}</textarea>
+                        <label class="block text-[9px] font-bold uppercase text-gray-500 mb-1">SQL Component Script / DDL Schema Configuration</label>
+                        <textarea id="db-sql-${db.id}" class="w-full text-xs p-2.5 rounded border bg-neutral-dark text-white focus:outline-none font-mono" rows="4" placeholder="CREATE TABLE ..." oninput="updateDatabase(${index}, 'sql', this.value)">${db.sql}</textarea>
                     </div>
-                    <div class="text-[9px] font-mono flex items-center justify-between text-gray-500">
-                        <span>Tracking Code: <strong>${db.id}</strong></span>
-                        ${db.screenId ? `
-                            <span class="text-orange-amber font-semibold"><i class="fa-solid fa-link"></i> Synchronized to Screen Flow: ${getLinkedScreenPath(db.screenId)}</span>
-                        ` : `
-                            <span class="text-gray-400"><i class="fa-solid fa-unlink"></i> Independent Custom DB Entity</span>
-                        `}
+                    <div class="text-[9px] font-mono text-gray-500 flex items-center justify-between">
+                        <span>Linked Screen ID: <strong>${db.screenId || 'MANUAL / INDEPENDENT'}</strong></span>
+                        ${db.screenId ? '<span class="text-semantic-success flex items-center space-x-1"><i class="fa-solid fa-lock"></i> <span>Wired</span></span>' : '<span class="text-gray-400">Isolated Table</span>'}
                     </div>
                 `;
                 container.appendChild(dbDiv);
             });
         }
 
-        // Manual SQL table addition helper
-        function addDatabaseTable() {
-            state.databases.push({
-                id: "db_custom_" + Date.now(),
-                screenId: null,
-                tableName: "tbl_custom",
-                sql: "CREATE TABLE tbl_custom (\n    id SERIAL PRIMARY KEY\n);",
-                dirty: true
-            });
-            renderDatabaseTables();
-            compileDynamicDoc();
-            showToast("Custom SQL Schema Entity added");
-        }
 
-        function removeDatabaseTable(index) {
-            state.databases.splice(index, 1);
-            renderDatabaseTables();
-            compileDynamicDoc();
-            showToast("Database table schema deleted");
-        }
-
-        function updateDatabaseTable(idx, field, val) {
-            state.databases[idx][field] = val;
-            // Mark dirty when edited manually to prevent screen updates rewriting it
-            state.databases[idx].dirty = true;
-            compileDynamicDoc();
-        }
-
-        // Dynamic binding resolver
-        function getLinkedScreenPath(screenId) {
-            const screen = state.screens.find(scr => scr.id === screenId);
-            return screen ? `"${screen.path}"` : "Unknown Screen";
-        }
-
-        function renderAllDynamicSubsections() {
-            renderScreens();
-            renderAPIs();
-            renderDatabaseTables();
-        }
-
+        // ==========================================
+        // COMPILER ENGINE & MARKDOWN PARSER
+        // ==========================================
         function compileDynamicDoc() {
             const project = document.getElementById('inp-project-name').value;
             const client = document.getElementById('inp-client-name').value;
@@ -783,30 +784,39 @@
             const secTransit = document.getElementById('inp-sec-transit').value;
             const secStorage = document.getElementById('inp-sec-storage').value;
 
-            // Generate Frontend markdown blocks dynamically
-            let screensMd = "*No screens documented.*";
-            let flowsMd = "*No interactive action flows documented.*";
-            if (state.screens && state.screens.length > 0) {
-                screensMd = state.screens.map(s => `* **Screen path: \`${s.path}\`** \n  ${s.description || '*No description provided.*'}`).join('\n');
-                
-                const verifiedFlows = state.screens.filter(s => s.flow.trim() !== '');
-                if (verifiedFlows.length > 0) {
-                    flowsMd = verifiedFlows.map(s => `* **Screen \`${s.path}\` flow event sequence:** \n  ${s.flow}`).join('\n');
-                }
-            }
+            // Group Screens by Client Platform
+            const mobileScreens = state.screens.filter(s => s.client === 'MOBILE');
+            const webScreens = state.screens.filter(s => s.client === 'WEB');
+            const adminScreens = state.screens.filter(s => s.client === 'ADMIN');
 
-            // Generate APIs markdown blocks dynamically
-            let apisMd = "*No backend endpoints documented.*";
-            if (state.apis && state.apis.length > 0) {
-                apisMd = state.apis.map((api, index) => `
-### 4.${index + 1} Endpoint: \`${api.method} ${api.path}\`
-* **Target UI Action Trigger:** ${api.trigger || 'Manual user invoke or backend script invocation'}
-* **Communication Specification/Response JSON Scheme:**
+            const makeScreenList = (list) => {
+                if (list.length === 0) return "*No screens documented under this concern tier.*";
+                return list.map(s => `* **Screen path: \`${s.path}\`** \n  *Description:* ${s.description || 'N/A'}\n  *Trigger Action:* ${s.flow || 'N/A'}`).join('\n');
+            };
+
+            // Group APIs by Client access permissions
+            const getApiTier = (api) => {
+                if (!api.screenId) return api.client || 'MOBILE';
+                const s = state.screens.find(scr => scr.id === api.screenId);
+                return s ? s.client : 'MOBILE';
+            };
+
+            const mobileApis = state.apis.filter(api => getApiTier(api) === 'MOBILE');
+            const webApis = state.apis.filter(api => getApiTier(api) === 'WEB');
+            const adminApis = state.apis.filter(api => getApiTier(api) === 'ADMIN');
+
+            const makeApiBlock = (list, scopeType) => {
+                if (list.length === 0) return `*No ${scopeType} APIs declared.*`;
+                return list.map((api, index) => `
+### \`${api.method} ${api.path}\`
+* **Trigger Screen / Flow:** ${api.trigger || 'Trigger statement is N/A'}
+* **Scope Specification:** ${scopeType} Access Tier ${scopeType === 'ADMIN' ? '(VPN / IP Whitelisted and strict MFA enforced)' : ''}
+* **Response Payload Structure:**
 \`\`\`json
 ${api.json || '{}'}
 \`\`\`
 `).join('\n');
-            }
+            };
 
             // Generate SQL Database Tables dynamically
             let dbsMd = "*No database schemas configured.*";
@@ -819,14 +829,14 @@ ${db.sql || '-- No SQL script defined'}
 `).join('\n');
             }
 
-            // Global Consolidated Markdown Builder
+            // Consolidated Markdown Builder
             const markdownSource = `# SYSTEM DESIGN DOCUMENT (SDD)
 
 **PROJECT:** ${project}
 **PREPARED BY:** SOLUTIONS ARCHITECTURE DIVISION, ORANGE INVENT HOUSE LTD.
 **PREPARED FOR:** ${client}
 **DOCUMENT ID:** ${rev}
-**DATE:** JULY 14, 2026
+**DATE:** JULY 17, 2026
 **STATUS:** ${status}
 
 ---
@@ -836,12 +846,19 @@ ${exec || '*No Executive Summary defined.*'}
 
 ---
 
-## 2. FRONTEND VIEWS & USER INTERACTION (UI)
-### 2.1 Screen Catalog Paths
-${screensMd}
+## 2. CLIENT SPECIFIC FRONTEND ARCHITECTURES (MULTI-CLIENT DESIGN)
 
-### 2.2 Core User Action Sequence Flows
-${flowsMd}
+### 2.1 Mobile Application Screens (Mobile App)
+*Focus: Native processing efficiency, offline-first SQLCipher caching strategies, and robust sync engines.*
+${makeScreenList(mobileScreens)}
+
+### 2.2 Public Web Application Screens (Public Web)
+*Focus: Search Engine Optimization (SEO), high visual fidelity, CDN-level caching systems, and lightweight payloads.*
+${makeScreenList(webScreens)}
+
+### 2.3 Administrative Dashboard Screens (Admin)
+*Focus: High-density data grid renderings, security telemetry visualization modules, and backend operations auditing.*
+${makeScreenList(adminScreens)}
 
 ---
 
@@ -850,8 +867,19 @@ ${dbsMd}
 
 ---
 
-## 4. SYSTEM APIS & EVENTS (ACTIONS)
-${apisMd}
+## 4. DECOUPLED BACKEND API SCHEMES & ACCESS SCOPES
+
+### 4.1 Customer Mobile API Namespace (Mobile Scope)
+*High throughput routes serving optimized client packages.*
+${makeApiBlock(mobileApis, 'MOBILE')}
+
+### 4.2 Web Services Namespace (Public Web Scope)
+*Public API controllers integrated with secure CDN layers.*
+${makeApiBlock(webApis, 'WEB')}
+
+### 4.3 Administrative Operations Namespace (Admin Scope)
+*Highly protected routes restricted to local office gateways. All transactions logged in an immutable audit ledger.*
+${makeApiBlock(adminApis, 'ADMIN')}
 
 ---
 
@@ -878,6 +906,10 @@ ${apisMd}
             document.getElementById('print-doc-status').innerText = status;
         }
 
+
+        // ==========================================
+        // EXPORT INTEGRATION HANDLERS
+        // ==========================================
         function downloadAsDocFile() {
             const previewHtml = document.getElementById('markdown-preview').innerHTML;
             const project = document.getElementById('inp-project-name').value;
@@ -885,68 +917,70 @@ ${apisMd}
             const rev = document.getElementById('inp-revision').value;
             const status = document.getElementById('inp-status').value;
 
-            const docEnvelope = `
+            const docTemplate = `
             <html xmlns:o='urn:schemas-microsoft-com:office:office' 
                   xmlns:w='urn:schemas-microsoft-com:office:word' 
                   xmlns='http://www.w3.org/TR/REC-html40'>
             <head>
                 <meta charset="utf-8">
-                <title>${project} - System Design Document</title>
+                <title>${project} - SDD</title>
                 <style>
                     @page { size: A4; margin: 1.0in; }
                     body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #212121; }
-                    .doc-header { border-bottom: 4px solid #E65100; padding-bottom: 12px; margin-bottom: 30px; }
-                    .doc-header h4 { color: #E65100; font-size: 16pt; margin: 0 0 5px 0; text-transform: uppercase; }
-                    .doc-header p { font-size: 9.5pt; color: #555555; margin: 0; font-family: monospace; }
+                    .letterhead { border-bottom: 4px solid #E65100; padding-bottom: 12px; margin-bottom: 30px; }
+                    .letterhead h4 { color: #E65100; font-size: 16pt; margin: 0 0 5px 0; text-transform: uppercase; }
+                    .letterhead p { font-size: 9.5pt; color: #555555; margin: 0; font-family: monospace; }
                     h1 { color: #E65100; font-size: 20pt; border-bottom: 2px solid #E65100; padding-bottom: 6px; margin-top: 24px; margin-bottom: 12px; }
                     h2 { color: #212121; font-size: 15pt; border-left: 4px solid #FF9800; padding-left: 8px; margin-top: 18px; margin-bottom: 10px; }
                     h3 { color: #D84315; font-size: 12pt; margin-top: 14px; margin-bottom: 8px; }
                     p, li { font-size: 10.5pt; margin-bottom: 10px; }
+                    ul, ol { margin-left: 20px; margin-bottom: 12px; }
                     code { background-color: #FFF8E1; color: #D84315; font-family: monospace; padding: 2px 4px; font-size: 9.5pt; }
-                    pre { background-color: #212121; color: #FAFAFA; padding: 12px; border-left: 4px solid #E65100; font-family: monospace; font-size: 9.5pt; margin-bottom: 12px; white-space: pre-wrap; }
+                    pre { background-color: #212121; color: #FAFAFA; padding: 12px; border-left: 4px solid #E65100; font-family: monospace; font-size: 9.5pt; margin-bottom: 12px; }
                     table { border-collapse: collapse; width: 100%; margin-top: 12px; margin-bottom: 20px; }
-                    th { background-color: #E65100; color: #ffffff; padding: 8px; border: 1px solid #FFB300; font-weight: bold; text-align: left; }
-                    td { padding: 8px; border: 1px solid #E0E0E0; }
+                    th { background-color: #E65100; color: #ffffff; padding: 8px; border: 1px solid #FFB300; font-weight: bold; font-size: 10pt; text-align: left; }
+                    td { padding: 8px; border: 1px solid #E0E0E0; font-size: 10pt; }
                     tr:nth-child(even) { background-color: #FFF8E1; }
-                    blockquote { border-left: 4px solid #E65100; background-color: #FFF8E1; padding: 10px; margin-bottom: 12px; font-style: italic; }
+                    blockquote { border-left: 4px solid #E65100; background-color: #FFF8E1; padding: 10px 15px; margin-bottom: 12px; font-style: italic; }
                 </style>
             </head>
             <body>
-                <div class="doc-header">
+                <div class="letterhead">
                     <h4>ORANGE INVENT HOUSE LTD.</h4>
                     <p>SOLUTIONS ARCHITECTURE DIVISION • LAGOS, NIGERIA</p>
                     <p>PROJECT: ${project}</p>
-                    <p>CLIENT: ${client}</p>
-                    <p>DOCUMENT ID: ${rev} | STATUS: ${status}</p>
+                    <p>CLIENT PARTNER: ${client}</p>
+                    <p>REVISION INDEX: ${rev} | STATUS: ${status}</p>
                 </div>
                 ${previewHtml}
             </body>
             </html>`;
 
-            const blob = new Blob(['\ufeff' + docEnvelope], { type: 'application/msword' });
-            const fileName = `${rev.toLowerCase().replace(/[^a-z0-9]/g, '_')}_design.doc`;
-
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute('download', fileName);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            showToast(`Downloaded Word File: ${fileName}`);
+            const blob = new Blob(['\ufeff' + docTemplate], { type: 'application/msword' });
+            const fileName = `${rev.toLowerCase().replace(/[^a-z0-9]/g, '_')}_architecture_design.doc`;
+            
+            if (navigator.msSaveBlob) {
+                navigator.msSaveBlob(blob, fileName);
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            showToast(`Downloaded Microsoft Word Document: ${fileName}`);
         }
 
-        // Print PDF Hook
         function triggerPrintMode() {
             window.print();
         }
 
-        // Toast notifications console
         function showToast(message) {
             const toast = document.getElementById('toast-notif');
             const toastText = document.getElementById('toast-message');
-            
             toastText.innerText = message;
+            
             toast.className = "no-print fixed bottom-6 right-6 bg-neutral-dark text-white text-xs px-5 py-3.5 rounded-lg shadow-2xl border-l-4 border-orange-primary transform translate-y-0 opacity-100 transition-all duration-300 flex items-center space-x-3 z-50";
             
             setTimeout(() => {
@@ -954,24 +988,23 @@ ${apisMd}
             }, 3000);
         }
 
-        // Dynamic System UTC timestamp update loop
-        function updateNodeTime() {
-            const date = new Date();
-            const year = date.getUTCFullYear();
-            const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-            const day = String(date.getUTCDate()).padStart(2, '0');
-            const hours = String(date.getUTCHours()).padStart(2, '0');
-            const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-            
-            document.getElementById('live-time-stamp').innerText = `NODE_Lagos_OK // ${year}-${month}-${day} @ ${hours}:${minutes} UTC`;
+        function refreshLiveStamp() {
+            const d = new Date();
+            const yr = d.getUTCFullYear();
+            const mn = String(d.getUTCMonth() + 1).padStart(2, '0');
+            const dy = String(d.getUTCDate()).padStart(2, '0');
+            const hr = String(d.getUTCHours()).padStart(2, '0');
+            const min = String(d.getUTCMinutes()).padStart(2, '0');
+            document.getElementById('live-time-stamp').innerText = `OIH_NODE_SYNC // ${yr}-${mn}-${dy} @ ${hr}:${min} UTC`;
         }
 
-        // Initialize Workspace Lifecycle
+        // Initialize Lifecycle on Startup
         window.onload = function() {
-            loadFormTemplate('blank');
-            updateNodeTime();
-            setInterval(updateNodeTime, 10000);
-        }
+            syncFormWithState();
+            compileDynamicDoc();
+            refreshLiveStamp();
+            setInterval(refreshLiveStamp, 10000);
+        };
     </script>
 </body>
 </html>
