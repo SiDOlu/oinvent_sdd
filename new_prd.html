@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange Invent House Ltd. - Product Requirement Document (PRD) Canvas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Marked.js for Live Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            color: #212121;
+        }
+        /* Custom scrollbar styling for a high-end enterprise experience */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E65100;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #BF360C;
+        }
+        /* Native Print PDF Optimizations */
+        @media print {
+            .no-print { display: none !important; }
+            .print-full { width: 100% !important; max-width: 100% !important; height: auto !important; overflow: visible !important; }
+            body { background: white; color: black; }
+        }
+        /* Markdown Preview Panel Typography Styles */
+        .markdown-body h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #E65100;
+            border-bottom: 2px solid #E65100;
+            padding-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .markdown-body h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #212121;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #FF9800;
+            padding-left: 0.5rem;
+        }
+        .markdown-body h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #D84315;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .markdown-body p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        .markdown-body ul, .markdown-body ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .markdown-body ul { list-style-type: disc; }
+        .markdown-body ol { list-style-type: decimal; }
+        .markdown-body li {
+            margin-bottom: 0.25rem;
+        }
+        .markdown-body code {
+            background-color: #FFF8E1;
+            color: #D84315;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .markdown-body pre {
+            background-color: #212121;
+            color: #FAFAFA;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            border-left: 4px solid #E65100;
+        }
+        .markdown-body pre code {
+            background-color: transparent;
+            color: #FAFAFA;
+            padding: 0;
+        }
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        .markdown-body th {
+            background-color: #E65100;
+            color: white;
+            text-align: left;
+            padding: 0.5rem;
+            border: 1px solid #FFB300;
+        }
+        .markdown-body td {
+            padding: 0.5rem;
+            border: 1px solid #E0E0E0;
+        }
+        .markdown-body tr:nth-child(even) {
+            background-color: #FFF8E1;
+        }
+        .markdown-body blockquote {
+            border-left: 4px solid #E65100;
+            background-color: #FFF8E1;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        // Custom Tailwind theme integration matching Orange Invent House Design System
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            primary: '#E65100', // Deep Orange
+                            amber: '#FF9800',   // Amber Highlight
+                            light: '#FFF8E1',   // Warm Tone White
+                            dark: '#BF360C'     // Dark Terracotta Accent
+                        },
+                        neutral: {
+                            dark: '#212121',    // Charcoal Typography Base
+                            light: '#FAFAFA',   // Premium Soft Gray Page Canvas
+                            border: '#E0E0E0'
+                        },
+                        semantic: {
+                            success: '#2E7D32', // Safe Emerald
+                            danger: '#C62828'   // Attention Red
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex flex-col h-screen overflow-hidden">
+
+    <!-- CORPORATE HEADER STRIP -->
+    <header class="no-print bg-neutral-dark text-white border-b-4 border-orange-primary px-6 py-4 flex flex-wrap items-center justify-between shadow-md z-10">
+        <div class="flex items-center space-x-4">
+            <!-- Orange Logo Mark -->
+            <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-orange-amber to-orange-primary flex items-center justify-center font-extrabold text-xl text-white shadow-inner transform rotate-3">
+                O
+            </div>
+            <div>
+                <h1 class="text-lg font-extrabold tracking-wide uppercase flex items-center">
+                    Orange Invent House <span class="text-orange-amber ml-2 text-xs font-semibold px-2 py-0.5 bg-orange-primary bg-opacity-20 rounded border border-orange-primary">PRD Canvas</span>
+                </h1>
+                <p class="text-[10px] text-gray-400 font-mono tracking-widest uppercase font-semibold">Product Engineering & Requirement Suite • Lagos, Nigeria</p>
+            </div>
+        </div>
+
+        <!-- System Sync Stamp -->
+        <div class="flex items-center space-x-6 text-xs font-mono mt-2 sm:mt-0">
+            <div class="hidden md:flex items-center space-x-2 text-gray-300">
+                <i class="fa-solid fa-location-dot text-orange-amber"></i>
+                <span>Lagos Node: 6.5244° N, 3.3792° E</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-black bg-opacity-40 px-3 py-1.5 rounded-md border border-gray-800">
+                <span class="h-2 w-2 rounded-full bg-semantic-success animate-pulse"></span>
+                <span class="text-gray-300 text-[11px]" id="live-time-stamp">SYNC_OK</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CORE WORKSPACE FRAME -->
+    <main class="flex-1 flex overflow-hidden">
+        
+        <!-- LEFT: CUSTOM COMPONENT BUILDER DASHBOARD (NO-PRINT) -->
+        <aside class="no-print w-1/2 bg-white border-r border-neutral-border flex flex-col h-full overflow-hidden">
+            
+            <!-- Controls Head/Reset Options -->
+            <div class="bg-gray-50 border-b border-neutral-border px-6 py-3.5 flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center space-x-2">
+                    <i class="fa-solid fa-sliders text-orange-primary"></i>
+                    <span>PRD Feature Definition Modules</span>
+                </span>
+                <button onclick="resetToEmptyProfile()" class="text-xs text-semantic-danger hover:text-white bg-white hover:bg-semantic-danger border border-red-200 px-3 py-1.5 rounded font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Clear Workspace</span>
+                </button>
+            </div>
+
+            <!-- Scrollable Input Form Modules -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-8">
+                
+                <!-- MODULE 1: GLOBAL METADATA -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-circle-info text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Document Controls & Metadata</h2>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Project Name</label>
+                            <input type="text" id="meta-project-name" onkeyup="updateStateAndPreview('projectName', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="Enter feature/system title...">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Product Owner / Author</label>
+                            <input type="text" id="meta-author" onkeyup="updateStateAndPreview('authorName', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="PM Name">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Client Name</label>
+                            <input type="text" id="meta-client" onkeyup="updateStateAndPreview('clientName', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="Target client or 'Internal'">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Release Code</label>
+                            <input type="text" id="meta-rev-code" onkeyup="updateStateAndPreview('revisionCode', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="e.g. OIH-PRD-XYZ-V1.0">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Target Date</label>
+                            <input type="date" id="meta-release-date" onchange="updateStateAndPreview('targetReleaseDate', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Document Status</label>
+                            <select id="meta-status" onchange="updateStateAndPreview('docStatus', this.value)" class="w-full text-xs p-3 rounded border border-gray-300 bg-white focus:outline-none focus:border-orange-primary">
+                                <option value="DRAFT">DRAFT</option>
+                                <option value="UNDER REVIEW">UNDER REVIEW</option>
+                                <option value="APPROVED">APPROVED</option>
+                                <option value="SHIPPED">SHIPPED</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MODULE 2: CONTEXT, VISION & KPIS -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-bullseye text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Vision & Contextual Background</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">User Problem Statement</label>
+                            <textarea id="vision-problem" onkeyup="updateStateAndPreview('problemStatement', this.value)" rows="3" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="What actual friction pain-points does this product solve?"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Core Product Vision</label>
+                            <textarea id="vision-core" onkeyup="updateStateAndPreview('vision', this.value)" rows="3" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="What is the high-level roadmap future for this system?"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Product Success KPIs (one per line)</label>
+                            <textarea id="vision-kpis" onkeyup="updateStateAndPreview('kpis', this.value)" rows="3" class="w-full text-xs p-3 font-mono rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="1. Decrease user signup attrition by 20%&#10;2. Forms must submit under 1s"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MODULE 3: TARGET USER PERSONAS (DYNAMIC ARRAY) -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-user-group text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Target User Personas</h2>
+                        </span>
+                        <button onclick="addPersona()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Persona</span>
+                        </button>
+                    </div>
+                    
+                    <div id="personas-form-list" class="space-y-4">
+                        <!-- Persona Inputs are injected here dynamically -->
+                    </div>
+                </section>
+
+                <!-- MODULE 4: FUNCTIONAL REQUIREMENTS MATRIX (DYNAMIC ARRAY) -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-list-check text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Functional Features Scope</h2>
+                        </span>
+                        <button onclick="addFeature()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Feature</span>
+                        </button>
+                    </div>
+                    
+                    <div id="features-form-list" class="space-y-4">
+                        <!-- Functional specs dynamically rendered here -->
+                    </div>
+                </section>
+
+                <!-- MODULE 5: KEY USER INTERACTION FLOWS (DYNAMIC ARRAY) -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <span class="flex items-center space-x-2">
+                            <i class="fa-solid fa-route text-orange-primary"></i>
+                            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Key User Navigation Flows</h2>
+                        </span>
+                        <button onclick="addFlow()" class="text-[11px] bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold transition flex items-center space-x-1">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Flow Step</span>
+                        </button>
+                    </div>
+                    
+                    <div id="flows-form-list" class="space-y-4">
+                        <!-- User flow steps injected dynamically here -->
+                    </div>
+                </section>
+
+                <!-- MODULE 6: BOUNDARIES, SCOPES & RISKS -->
+                <section class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex items-center space-x-2 pb-2 border-b border-gray-100">
+                        <i class="fa-solid fa-triangle-exclamation text-orange-primary"></i>
+                        <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Boundaries & System Constraints</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Out-of-Scope (Non-Goals)</label>
+                            <textarea id="scope-non-goals" onkeyup="updateStateAndPreview('nonGoals', this.value)" rows="3" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="What will this system explicitly NOT accomplish in this release cycles?"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">Assumptions</label>
+                            <textarea id="scope-assumptions" onkeyup="updateStateAndPreview('assumptions', this.value)" rows="3" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="List any assumptions. e.g. Users operate devices with GPS capabilities."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 tracking-wider mb-1">External Dependencies & Risks</label>
+                            <textarea id="scope-dependencies" onkeyup="updateStateAndPreview('dependencies', this.value)" rows="3" class="w-full text-xs p-3 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="e.g. Third-party notification gateways, active network service updates, security audits."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </aside>
+
+        <!-- RIGHT: LIVE PRD PREVIEW CONTAINER -->
+        <section class="flex-1 flex flex-col h-full bg-white relative print-full overflow-hidden">
+            
+            <!-- Preview Action Toolbar (No Print) -->
+            <div class="no-print bg-gray-50 px-6 py-3 border-b border-neutral-border flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center space-x-2">
+                    <i class="fa-solid fa-laptop-code text-orange-primary"></i>
+                    <span>Formatted Requirements Preview (Live Document)</span>
+                </span>
+                <div class="flex items-center space-x-2">
+                    <button onclick="downloadAsDocFile()" class="text-xs bg-white text-gray-700 hover:text-orange-primary px-3 py-1.5 rounded border border-gray-300 shadow-sm font-semibold flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-file-word text-blue-600"></i>
+                        <span>Download DOC</span>
+                    </button>
+                    <button onclick="triggerPrintMode()" class="text-xs bg-orange-primary hover:bg-orange-dark text-white px-3 py-1.5 rounded font-bold flex items-center space-x-1.5 shadow-sm transition">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Print PDF</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Page Canvas -->
+            <div class="flex-1 overflow-y-auto p-8 md:p-12 print-full" id="print-canvas">
+                
+                <!-- Print Letterhead Header Banner -->
+                <div class="hidden print:flex flex-col border-b-4 border-orange-primary pb-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-xl font-bold uppercase text-orange-primary">ORANGE INVENT HOUSE LTD.</h1>
+                            <p class="text-xs font-mono text-gray-600">Solutions Architecture Division • Lagos, Nigeria</p>
+                        </div>
+                        <div class="text-right text-[10px] font-mono text-gray-500">
+                            <p>DOC ID: <span id="print-rev-code">OIH-PRD-EMPTY-V1.0</span></p>
+                            <p>STATUS: <span id="print-doc-status">DRAFT</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Document Target -->
+                <div id="prd-document-preview" class="markdown-body"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- NOTIFICATION SYSTEM -->
+    <div id="toast-notif" class="no-print fixed bottom-6 right-6 bg-neutral-dark text-white text-xs px-5 py-3.5 rounded-lg shadow-2xl border-l-4 border-orange-primary transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50">
+        <i class="fa-solid fa-circle-check text-orange-amber"></i>
+        <span id="toast-message">Workspace reset successful.</span>
+    </div>
+
+    <!-- CORE LOGIC & STATE HANDLING -->
+    <script>
+        // Stateful empty profile initialization for Orange Invent House PRD
+        let documentState = {
+            projectName: "NEW CORE ARCHITECTURE SOLUTION",
+            clientName: "ORANGE INVENT HOUSE",
+            authorName: "Product Management Team",
+            docStatus: "DRAFT",
+            revisionCode: "OIH-PRD-NEW-V1.0",
+            targetReleaseDate: "2026-12-31",
+            problemStatement: "Users face significant data desynchronization issues and dropouts while working in areas with degraded wireless network coverage.",
+            vision: "Design and implement an adaptive, secure offline data buffering runtime module that secures transactions locally and syncs gracefully when server access returns.",
+            kpis: "1. Zero packet losses on transition sync audits.\n2. Screen load latency under normal connections stays below 800ms.",
+            nonGoals: "Implementing automatic background image-compression algorithms during this sprint iteration.",
+            assumptions: "1. Users are equipped with Android devices running OS versions 11 or higher.\n2. Biometric hardware readers are available on target devices.",
+            dependencies: "Third-party authentication protocols and unified cellular spatial mapping services.",
+            personas: [
+                {
+                    name: "Field Analyst",
+                    profile: "Spends 80% of active business hours in rural regions with unstable telecom connectivity.",
+                    needs: "Resilient offline data persistence, high visual accessibility metrics on mobile screens.",
+                    scenario: "Capturing geocoordinates of infrastructural systems in remote settlements."
+                }
+            ],
+            features: [
+                {
+                    id: "FR-01",
+                    priority: "Must Have",
+                    name: "Encrypted SQLite Buffer Store",
+                    story: "As a Field Analyst, I want to save captured records securely onto my local filesystem, so that my progress is never compromised during network losses.",
+                    criteria: "1. Writes to device disk instantly.\n2. Encrypts local buffers using AES-256 standard key metrics."
+                }
+            ],
+            flows: [
+                {
+                    step: "1",
+                    screen: "/dashboard",
+                    action: "User taps the sync status pill widget.",
+                    expected: "Ecosystem runs background transaction checks, verifying system parity stats on-screen."
+                }
+            ]
+        };
+
+        // UI Reset Option to return to clean Baseline Draft state
+        function resetToEmptyProfile() {
+            documentState = {
+                projectName: "EMPTY BLUEPRINT PROFILE",
+                clientName: "INTERNAL SYSTEMS",
+                authorName: "Product Lead",
+                docStatus: "DRAFT",
+                revisionCode: "OIH-PRD-EMPTY-V1.0",
+                targetReleaseDate: "",
+                problemStatement: "",
+                vision: "",
+                kpis: "",
+                nonGoals: "",
+                assumptions: "",
+                dependencies: "",
+                personas: [],
+                features: [],
+                flows: []
+            };
+            syncFormWithState();
+            compileAndRenderPreview();
+            showToast("PRD Workspace cleared back to empty profile baseline");
+        }
+
+        // Setup forms UI structures
+        function syncFormWithState() {
+            document.getElementById('meta-project-name').value = documentState.projectName;
+            document.getElementById('meta-author').value = documentState.authorName;
+            document.getElementById('meta-client').value = documentState.clientName;
+            document.getElementById('meta-rev-code').value = documentState.revisionCode;
+            document.getElementById('meta-release-date').value = documentState.targetReleaseDate;
+            document.getElementById('meta-status').value = documentState.docStatus;
+
+            document.getElementById('vision-problem').value = documentState.problemStatement;
+            document.getElementById('vision-core').value = documentState.vision;
+            document.getElementById('vision-kpis').value = documentState.kpis;
+
+            document.getElementById('scope-non-goals').value = documentState.nonGoals;
+            document.getElementById('scope-assumptions').value = documentState.assumptions;
+            document.getElementById('scope-dependencies').value = documentState.dependencies;
+
+            renderPersonasForms();
+            renderFeaturesForms();
+            renderFlowsForms();
+        }
+
+        // Live input sync
+        function updateStateAndPreview(key, val) {
+            documentState[key] = val;
+            compileAndRenderPreview();
+        }
+
+        // PERSONA FORMS BUILDER
+        function renderPersonasForms() {
+            const list = document.getElementById('personas-form-list');
+            list.innerHTML = "";
+            documentState.personas.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-4 bg-orange-light bg-opacity-40 rounded-lg border border-orange-200 relative space-y-3";
+                card.innerHTML = `
+                    <button onclick="removePersona(${idx})" class="absolute top-3 right-3 text-semantic-danger hover:text-red-700 transition" title="Delete Persona">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                    <div class="grid grid-cols-1 gap-2.5 pr-6">
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Persona Name/Archetype</label>
+                            <input type="text" onkeyup="updatePersona(${idx}, 'name', this.value)" value="${p.name}" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="e.g. Field Supervisor">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Demographics / Core Profile</label>
+                            <input type="text" onkeyup="updatePersona(${idx}, 'profile', this.value)" value="${p.profile}" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="e.g. Needs high readability, works outdoors">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Needs & Objectives</label>
+                            <textarea onkeyup="updatePersona(${idx}, 'needs', this.value)" rows="2" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="What are they hoping to achieve?">${p.needs}</textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Day-to-day Work Scenario</label>
+                            <textarea onkeyup="updatePersona(${idx}, 'scenario', this.value)" rows="2" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="Describe their environment/flow...">${p.scenario}</textarea>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addPersona() {
+            documentState.personas.push({ name: "", profile: "", needs: "", scenario: "" });
+            renderPersonasForms();
+            compileAndRenderPreview();
+        }
+
+        function removePersona(idx) {
+            documentState.personas.splice(idx, 1);
+            renderPersonasForms();
+            compileAndRenderPreview();
+        }
+
+        function updatePersona(idx, field, val) {
+            documentState.personas[idx][field] = val;
+            compileAndRenderPreview();
+        }
+
+
+        // FEATURE FORMS SPECIFICATION BUILDER
+        function renderFeaturesForms() {
+            const list = document.getElementById('features-form-list');
+            list.innerHTML = "";
+            documentState.features.forEach((f, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-4 bg-gray-50 rounded-lg border border-gray-200 relative space-y-3";
+                card.innerHTML = `
+                    <button onclick="removeFeature(${idx})" class="absolute top-3 right-3 text-semantic-danger hover:text-red-700 transition" title="Delete Feature">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                    <div class="grid grid-cols-3 gap-2.5 pr-6">
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Requirement ID</label>
+                            <input type="text" onkeyup="updateFeature(${idx}, 'id', this.value)" value="${f.id}" class="w-full text-xs p-2 rounded border border-gray-300 font-mono focus:outline-none focus:border-orange-primary" placeholder="FR-01">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Feature Name</label>
+                            <input type="text" onkeyup="updateFeature(${idx}, 'name', this.value)" value="${f.name}" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary" placeholder="Secure Offline Buffer">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Priority (MoSCoW)</label>
+                            <select onchange="updateFeature(${idx}, 'priority', this.value)" class="w-full text-xs p-2 rounded border border-gray-300 bg-white focus:outline-none focus:border-orange-primary">
+                                <option value="Must Have" ${f.priority === 'Must Have' ? 'selected' : ''}>Must Have</option>
+                                <option value="Should Have" ${f.priority === 'Should Have' ? 'selected' : ''}>Should Have</option>
+                                <option value="Could Have" ${f.priority === 'Could Have' ? 'selected' : ''}>Could Have</option>
+                                <option value="Won't Have" ${f.priority === "Won't Have" ? 'selected' : ''}>Won't Have</option>
+                            </select>
+                        </div>
+                        <div class="col-span-3">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">User Story Format</label>
+                            <textarea onkeyup="updateFeature(${idx}, 'story', this.value)" rows="2" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="As a [type of user], I want to [do something] so that [some value].">${f.story}</textarea>
+                        </div>
+                        <div class="col-span-3">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Technical Acceptance Criteria (one per line)</label>
+                            <textarea onkeyup="updateFeature(${idx}, 'criteria', this.value)" rows="2" class="w-full text-xs p-2 font-mono rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="1. Save immediately to local state storage database.">${f.criteria}</textarea>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addFeature() {
+            const nextIdNum = documentState.features.length + 1;
+            const formattedId = `FR-${String(nextIdNum).padStart(2, '0')}`;
+            documentState.features.push({ id: formattedId, priority: "Must Have", name: "", story: "", criteria: "" });
+            renderFeaturesForms();
+            compileAndRenderPreview();
+        }
+
+        function removeFeature(idx) {
+            documentState.features.splice(idx, 1);
+            renderFeaturesForms();
+            compileAndRenderPreview();
+        }
+
+        function updateFeature(idx, field, val) {
+            documentState.features[idx][field] = val;
+            compileAndRenderPreview();
+        }
+
+
+        // NAVIGATION FLOWS STEP BUILDER
+        function renderFlowsForms() {
+            const list = document.getElementById('flows-form-list');
+            list.innerHTML = "";
+            documentState.flows.forEach((fl, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-4 bg-orange-light bg-opacity-40 rounded-lg border border-orange-200 relative space-y-3";
+                card.innerHTML = `
+                    <button onclick="removeFlow(${idx})" class="absolute top-3 right-3 text-semantic-danger hover:text-red-700 transition" title="Delete Step">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                    <div class="grid grid-cols-4 gap-2.5 pr-6">
+                        <div>
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Step Number</label>
+                            <input type="text" onkeyup="updateFlow(${idx}, 'step', this.value)" value="${fl.step}" class="w-full text-xs p-2 rounded border border-gray-300 font-mono focus:outline-none focus:border-orange-primary" placeholder="e.g. 1">
+                        </div>
+                        <div class="col-span-3">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Active Route / UI View</label>
+                            <input type="text" onkeyup="updateFlow(${idx}, 'screen', this.value)" value="${fl.screen}" class="w-full text-xs p-2 rounded border border-gray-300 font-mono focus:outline-none focus:border-orange-primary" placeholder="e.g. /dashboard">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">Trigger Interaction / User Action</label>
+                            <textarea onkeyup="updateFlow(${idx}, 'action', this.value)" rows="2" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="e.g. User triggers offline synchronizer...">${fl.action}</textarea>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[9px] font-bold uppercase text-gray-500 tracking-wider mb-0.5">System State / Expected Outcome</label>
+                            <textarea onkeyup="updateFlow(${idx}, 'expected', this.value)" rows="2" class="w-full text-xs p-2 rounded border border-gray-300 focus:outline-none focus:border-orange-primary resize-none" placeholder="e.g. Displays sync progression bar overlay...">${fl.expected}</textarea>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addFlow() {
+            const nextStep = documentState.flows.length + 1;
+            documentState.flows.push({ step: String(nextStep), screen: "", action: "", expected: "" });
+            renderFlowsForms();
+            compileAndRenderPreview();
+        }
+
+        function removeFlow(idx) {
+            documentState.flows.splice(idx, 1);
+            renderFlowsForms();
+            compileAndRenderPreview();
+        }
+
+        function updateFlow(idx, field, val) {
+            documentState.flows[idx][field] = val;
+            compileAndRenderPreview();
+        }
+
+
+        // MARKDOWN PREVIEW DYNAMIC COMPILING
+        function compileAndRenderPreview() {
+            let md = `# PRODUCT REQUIREMENT DOCUMENT (PRD)
+
+**PROJECT NAME:** ${documentState.projectName || '*Not Specified*'}  
+**AUTHOR / PRODUCT OWNER:** ${documentState.authorName || '*Not Specified*'}  
+**CLIENT PARTNER:** ${documentState.clientName || '*Not Specified*'}  
+**REVISION INDEX:** ${documentState.revisionCode || '*Not Specified*'}  
+**RELEASE TARGET:** ${documentState.targetReleaseDate || '*Not Specified*'}  
+**DOCUMENT STATUS:** ${documentState.docStatus || '*DRAFT*'}  
+
+---
+
+## 1. EXECUTIVE OVERVIEW & SUCCESS METRICS
+
+### 1.1 Problem Statement
+${documentState.problemStatement || '*Provide background on problem constraints.*'}
+
+### 1.2 Core Product Vision
+${documentState.vision || '*Enter the future product objective roadmap.*'}
+
+### 1.3 Key Performance Indicators (KPIs)
+${documentState.kpis ? documentState.kpis.split('\n').map(line => `* ${line}`).join('\n') : '*List metrics to define success.*'}
+
+---
+
+## 2. USER PERSONAS & ECOSYSTEM
+`;
+
+            if (documentState.personas && documentState.personas.length > 0) {
+                documentState.personas.forEach(p => {
+                    md += `### Persona: ${p.name || 'Unnamed Actor'}\n`;
+                    md += `* **Target Demographics Profile:** ${p.profile || 'N/A'}\n`;
+                    md += `* **Needs & Goals:** ${p.needs || 'N/A'}\n`;
+                    md += `* **User Day Scenario:** *${p.scenario || 'N/A'}*\n\n`;
+                });
+            } else {
+                md += `*No personas registered inside workspace context yet.*\n\n`;
+            }
+
+            md += `---
+
+## 3. FUNCTIONAL REQUIREMENTS MATRIX
+
+| Requirement ID | Priority | Feature Name | Description / User Story | Acceptance Criteria |
+| :--- | :--- | :--- | :--- | :--- |
+`;
+
+            if (documentState.features && documentState.features.length > 0) {
+                documentState.features.forEach(f => {
+                    const formattedCriteria = f.criteria ? f.criteria.split('\n').join('<br>') : 'N/A';
+                    md += `| **${f.id || 'N/A'}** | ${f.priority || 'N/A'} | ${f.name || 'Unnamed'} | *${f.story || 'N/A'}* | ${formattedCriteria} |\n`;
+                });
+            } else {
+                md += `| **FR-XX** | *Priority* | *Feature* | *As a user...* | *Criteria details...* |\n`;
+            }
+
+            md += `
+---
+
+## 4. SCREEN FLOWS & KEY USER INTERACTION PATHWAYS
+
+| Step | Current Screen Route | User Action / Trigger Event | Expected System Outcome |
+| :--- | :--- | :--- | :--- |
+`;
+
+            if (documentState.flows && documentState.flows.length > 0) {
+                documentState.flows.forEach(fl => {
+                    md += `| **${fl.step || '1'}** | \`${fl.screen || '/'}\` | ${fl.action || 'N/A'} | ${fl.expected || 'N/A'} |\n`;
+                });
+            } else {
+                md += `| **1** | \`/home\` | *User Interaction...* | *System changes...* |\n`;
+            }
+
+            md += `
+---
+
+## 5. SCOPE BOUNDARIES & EXTERNAL RISK PROFILE
+
+### 5.1 Out-of-Scope (Non-Goals)
+${documentState.nonGoals || '*List items explicitly left out of scope.*'}
+
+### 5.2 Business Assumptions
+${documentState.assumptions || '*List assumptions related to system operation.*'}
+
+### 5.3 System Dependencies & Risks
+${documentState.dependencies || '*List critical dependencies.*'}
+`;
+
+            // Render Markdown using Marked.js
+            marked.setOptions({ gfm: true, breaks: true, headerIds: false });
+            document.getElementById('prd-document-preview').innerHTML = marked.parse(md);
+
+            // Sync structural printing tags
+            document.getElementById('print-rev-code').innerText = documentState.revisionCode || 'OIH-PRD-EMPTY-V1.0';
+            document.getElementById('print-doc-status').innerText = documentState.docStatus || 'DRAFT';
+        }
+
+        // EXPORT MS WORD (.DOC WITH INLINE CORPO XML STRUCTURES)
+        function downloadAsDocFile() {
+            const previewHtml = document.getElementById('prd-document-preview').innerHTML;
+            
+            const fileTemplate = `
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+                  xmlns:w='urn:schemas-microsoft-com:office:word' 
+                  xmlns='http://www.w3.org/TR/REC-html40'>
+            <head>
+                <meta charset="utf-8">
+                <title>PRD - ${documentState.projectName}</title>
+                <style>
+                    @page { size: A4; margin: 1.0in; }
+                    body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #212121; }
+                    .letterhead { border-bottom: 4px solid #E65100; padding-bottom: 12px; margin-bottom: 30px; }
+                    .letterhead h4 { color: #E65100; font-size: 16pt; margin: 0 0 5px 0; text-transform: uppercase; }
+                    .letterhead p { font-size: 9.5pt; color: #555555; margin: 0; font-family: monospace; }
+                    h1 { color: #E65100; font-size: 20pt; border-bottom: 2px solid #E65100; padding-bottom: 6px; margin-top: 24px; margin-bottom: 12px; }
+                    h2 { color: #212121; font-size: 15pt; border-left: 4px solid #FF9800; padding-left: 8px; margin-top: 18px; margin-bottom: 10px; }
+                    h3 { color: #D84315; font-size: 12pt; margin-top: 14px; margin-bottom: 8px; }
+                    p, li { font-size: 10.5pt; margin-bottom: 10px; }
+                    ul, ol { margin-left: 20px; margin-bottom: 12px; }
+                    code { background-color: #FFF8E1; color: #D84315; font-family: monospace; padding: 2px 4px; font-size: 9.5pt; }
+                    pre { background-color: #212121; color: #FAFAFA; padding: 12px; border-left: 4px solid #E65100; font-family: monospace; font-size: 9.5pt; margin-bottom: 12px; }
+                    table { border-collapse: collapse; width: 100%; margin-top: 12px; margin-bottom: 20px; }
+                    th { background-color: #E65100; color: #ffffff; padding: 8px; border: 1px solid #FFB300; font-weight: bold; font-size: 10pt; text-align: left; }
+                    td { padding: 8px; border: 1px solid #E0E0E0; font-size: 10pt; }
+                    tr:nth-child(even) { background-color: #FFF8E1; }
+                    blockquote { border-left: 4px solid #E65100; background-color: #FFF8E1; padding: 10px 15px; margin-bottom: 12px; font-style: italic; }
+                </style>
+            </head>
+            <body>
+                <div class="letterhead">
+                    <h4>ORANGE INVENT HOUSE LTD.</h4>
+                    <p>SOLUTIONS ARCHITECTURE DIVISION • LAGOS, NIGERIA</p>
+                    <p>PROJECT: ${documentState.projectName}</p>
+                    <p>CLIENT PARTNER: ${documentState.clientName}</p>
+                    <p>REVISION INDEX: ${documentState.revisionCode} | STATUS: ${documentState.docStatus}</p>
+                </div>
+                ${previewHtml}
+            </body>
+            </html>`;
+
+            const blob = new Blob(['\ufeff' + fileTemplate], { type: 'application/msword' });
+            const docFileName = `${(documentState.revisionCode || 'prd_spec').toLowerCase().replace(/[^a-z0-9]/g, '_')}_document.doc`;
+            
+            if (navigator.msSaveBlob) {
+                navigator.msSaveBlob(blob, docFileName);
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute('download', docFileName);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            showToast(`Downloaded Word PRD Spec: ${docFileName}`);
+        }
+
+        // Print PDF Hook
+        function triggerPrintMode() {
+            window.print();
+        }
+
+        // Notification utility
+        function showToast(message) {
+            const toast = document.getElementById('toast-notif');
+            const toastText = document.getElementById('toast-message');
+            toastText.innerText = message;
+            
+            toast.className = "no-print fixed bottom-6 right-6 bg-neutral-dark text-white text-xs px-5 py-3.5 rounded-lg shadow-2xl border-l-4 border-orange-primary transform translate-y-0 opacity-100 transition-all duration-300 flex items-center space-x-3 z-50";
+            
+            setTimeout(() => {
+                toast.className = "no-print fixed bottom-6 right-6 bg-neutral-dark text-white text-xs px-5 py-3.5 rounded-lg shadow-2xl border-l-4 border-orange-primary transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 z-50";
+            }, 3000);
+        }
+
+        // Live Clock Updates (UTC + System alignment sync)
+        function refreshLiveStamp() {
+            const d = new Date();
+            const yr = d.getUTCFullYear();
+            const mn = String(d.getUTCMonth() + 1).padStart(2, '0');
+            const dy = String(d.getUTCDate()).padStart(2, '0');
+            const hr = String(d.getUTCHours()).padStart(2, '0');
+            const min = String(d.getUTCMinutes()).padStart(2, '0');
+            document.getElementById('live-time-stamp').innerText = `OIH_PRD_SYNC // ${yr}-${mn}-${dy} @ ${hr}:${min} UTC`;
+        }
+
+        // Initialize Workspace Lifecycle
+        window.onload = function() {
+            syncFormWithState();
+            compileAndRenderPreview();
+            refreshLiveStamp();
+            setInterval(refreshLiveStamp, 10000);
+        };
+    </script>
+</body>
+</html>
